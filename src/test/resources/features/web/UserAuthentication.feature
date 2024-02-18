@@ -1,6 +1,6 @@
 @web
 
-Feature: API User Authentication
+Feature: Web User Authentication
 	As a registered user, I want to authenticate successfully so that I can access my account and perform actions within the system.
 
 	Background:
