@@ -1,3 +1,5 @@
+@as400
+	
 Feature: System Status Display on AS400 Terminal
 	As a system administrator, I want to be able to view the current status of the AS400 system so that I can quickly assess its operational state and address any issues promptly.
 
