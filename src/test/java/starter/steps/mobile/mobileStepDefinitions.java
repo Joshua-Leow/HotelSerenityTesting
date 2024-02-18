@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import starter.actions.web.LoginActions;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -27,6 +28,13 @@ public class mobileStepDefinitions {
             throw new RuntimeException(e);
         }
         return mdriver;
+    }
+
+    @Given("{actor} is on the login page via mobile")
+    public void userIsOnTheLoginPage(Actor actor) {
+        actor.attemptsTo(
+                LoginActions.navigateToLoginPage()
+        );
     }
 
     @When("{actor} input username {string} and password {string} using mobile")

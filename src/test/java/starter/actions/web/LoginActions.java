@@ -1,5 +1,6 @@
 package starter.actions.web;
 
+import net.serenitybdd.core.Serenity;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
@@ -10,8 +11,9 @@ import starter.pages.web.LoginPage;
 public class LoginActions {
 
     public static Performable navigateToLoginPage() {
+        String environment = "environments." + Serenity.environmentVariables().getProperty("environment", "default");
         return Task.where("{0} navigates to login page",
-                Open.browserOn().the(LoginPage.class)
+                Open.url(Serenity.environmentVariables().getProperty(environment + ".webdriver.base.url"))
         );
     }
     public static Performable enterUserName(String username) {

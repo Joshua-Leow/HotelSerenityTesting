@@ -1,10 +1,8 @@
 package starter.pages.web;
 
-import net.serenitybdd.annotations.DefaultUrl;
 import net.serenitybdd.screenplay.targets.Target;
-import net.thucydides.core.pages.PageObject;
 
-public class LoginPage extends PageObject {
+public class LoginPage {
     public static Target USERNAME_FIELD = Target.the("User Name").locatedBy("#username");
     public static Target PASSWORD_FIELD = Target.the("User Password").locatedBy("#password");
     public static Target SIGNIN_BUTTON = Target.the("Sign In").locatedBy("//button[contains(@class, 'btn') and text()='Sign in']");
