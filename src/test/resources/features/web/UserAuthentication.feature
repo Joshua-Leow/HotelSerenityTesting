@@ -25,8 +25,9 @@ Feature: Web User Authentication
 		And User clicks Sign Up Register button
 		Then User redirects to login page
 		Examples:
-			| firstname | lastname | phone | email | username | password |
-			| user      | user     | 12345 | ab@cd | userrand | user01   |
+			| firstname | lastname | phone | email  | username | password |
+			| user      | user     | 12345 | ab@cde | user999  | user01   |
+		# email and username cannot exist
 
 # mvn clean verify "-Dproperties=serenity.properties -Dcucumber.filter.tags=@web"
 # mvn clean verify "-Dproperties=serenity.properties -Dcucumber.filter.tags=not @mobile"
