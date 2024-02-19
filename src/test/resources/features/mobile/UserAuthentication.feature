@@ -12,6 +12,6 @@ Feature: Mobile User Authentication
 
 		Examples:
 			| Username  | Password   |
-			| user01    | user01    |
+			| user01    | user01     |
 
 # mvn clean verify -Dwebdriver.driver=appium -Dcucumber.filter.tags=@mobile

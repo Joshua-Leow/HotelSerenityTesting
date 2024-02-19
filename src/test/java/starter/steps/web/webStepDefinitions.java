@@ -5,7 +5,10 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.ensure.Ensure;
+import net.serenitybdd.screenplay.questions.page.TheWebPage;
 import starter.actions.web.LoginActions;
+import starter.actions.web.RegisterActions;
 import starter.questions.HomePageQuestions;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
@@ -48,6 +51,69 @@ public class webStepDefinitions {
     public void userShouldBeAuthenticatedSuccessfully(Actor actor) {
         actor.should(
                 seeThat(HomePageQuestions.isPrimaryAccountViewDetailsButtonVisible())
+        );
+    }
+
+    @When("{actor} clicks Sign Up button")
+    public void userClicksSignUpButton(Actor actor) {
+        actor.attemptsTo(
+                LoginActions.clickSignUp()
+        );
+    }
+
+    @And("{actor} enters first name {string}")
+    public void userEntersFirstName(Actor actor, String firstname) {
+        actor.attemptsTo(
+                RegisterActions.enterFirstName(firstname)
+        );
+    }
+
+    @And("{actor} enters last name {string}")
+    public void userEntersLastName(Actor actor, String lastname) {
+        actor.attemptsTo(
+                RegisterActions.enterLastName(lastname)
+        );
+    }
+
+    @And("{actor} enters phone {string}")
+    public void userEntersPhone(Actor actor, String phone) {
+        actor.attemptsTo(
+                RegisterActions.enterPhone(phone)
+        );
+    }
+
+    @And("{actor} enters email {string}")
+    public void userEntersEmail(Actor actor, String email) {
+        actor.attemptsTo(
+                RegisterActions.enterEmail(email)
+        );
+    }
+
+    @And("{actor} enters username {string}")
+    public void userEntersUsername(Actor actor, String username) {
+        actor.attemptsTo(
+                RegisterActions.enterUsername(username)
+        );
+    }
+
+    @And("{actor} enters password {string}")
+    public void userEntersPassword(Actor actor, String password) {
+        actor.attemptsTo(
+                RegisterActions.enterPassword(password)
+        );
+    }
+
+    @And("{actor} clicks Sign Up Register button")
+    public void userClicksSignUpRegisterButton(Actor actor) {
+        actor.attemptsTo(
+                RegisterActions.clickSignUp()
+        );
+    }
+
+    @Then("{actor} redirects to login page")
+    public void userRedirectsToLoginPage(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(TheWebPage.currentUrl()).containsIgnoringCase("index")
         );
     }
 }
