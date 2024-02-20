@@ -8,7 +8,7 @@ Feature: API User Authentication
 
 		Examples:
 			| Username  | Password   |
-			| user01    | user01    |
+			| user01    | user01     |
 
 # mvn clean verify "-Dproperties=serenity.properties -Dcucumber.filter.tags=@api"
 # mvn clean verify "-Dproperties=serenity.properties -Dcucumber.filter.tags=not @mobile"
