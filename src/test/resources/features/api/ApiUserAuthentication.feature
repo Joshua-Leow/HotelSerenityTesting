@@ -5,11 +5,20 @@ Feature: API User Authentication
 
 	Scenario Outline: Successful User Authentication
 		Given User is logged in using username '<Username>' and password '<Password>'
-		Then User should see the response authenticated successfully
+		Then User should see the signin response authenticated successfully
 
 		Examples:
 			| Username  | Password   |
 			| user01    | user01     |
+
+#	Scenario Outline: Successful Deposit
+#		Given User is logged in using username '<Username>' and password '<Password>'
+#		When User deposit amount '<Amount>' into account '<Account>'
+#		Then User should see the deposit response authenticated successfully
+#
+#		Examples:
+#			| Username  | Password   | Amount   | Account   |
+#			| user01    | user01     | 1000     | Primary   |
 
 # mvn clean verify "-Dproperties=serenity.properties -Dcucumber.filter.tags=@api"
 # mvn clean verify "-Dproperties=serenity.properties -Dcucumber.filter.tags=not @mobile"
