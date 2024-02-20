@@ -2,6 +2,7 @@ package starter.steps.api;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import io.restassured.http.ContentType;
 import io.restassured.mapper.ObjectMapperType;
 import io.restassured.path.json.JsonPath;
@@ -65,5 +66,10 @@ public class apiStepDefinitions {
 
         assertThat(actualMessage).as("Message is correct").isEqualTo(expectedMessage);
         assertThat(actualStatus).as("Status is correct").isEqualTo(expectedStatus);
+    }
+
+    @When("{actor} deposit amount {double} into account {string}")
+    public void userDepositAmountIntoAcount(Actor actor, Double amount, String account) {
+
     }
 }
