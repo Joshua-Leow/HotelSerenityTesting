@@ -15,3 +15,19 @@ Feature: System Status Display on AS400 Terminal
 		Examples:
 			| Username | Password |
 			| RRHADI   | K$$ja01  |
+
+	Scenario Outline: Login successfully to AS400
+		When User log in with username '<Username>' and password '<Password>'
+		Then User should see the text 'Display Messages' on the screen
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+
+	Scenario Outline: Unsuccessful Login using invalid credentials
+		When User log in with username '<Username>' and password '<Password>'
+		Then User should see the text 'does not exist or password not correct for user profile' on the screen
+#		CPF1120 - User TEST does not exist or password not correct for user profile.
+
+		Examples:
+			| Username | Password |
+			| TEST     | TEST123  |
