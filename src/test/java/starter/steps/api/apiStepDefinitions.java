@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.http.ContentType;
 import io.restassured.mapper.ObjectMapperType;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.rest.SerenityRest;
@@ -13,6 +14,8 @@ import net.serenitybdd.screenplay.Actor;
 import starter.actions.web.LoginActions;
 import starter.pages.API.LoginPage;
 import starter.questions.HomePageQuestions;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 import static io.restassured.RestAssured.given;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
@@ -27,13 +30,13 @@ public class apiStepDefinitions {
     @Given("{actor} is logged in using username {string} and password {string}")
     public void userIsLoggedInUsingUsernameUsernameAndPasswordPassword(Actor actor, String username, String password) {
         LoginPage payload = new LoginPage(username, password);
-        String userName = SerenityRest.given()
-                .baseUri(getCurrentEndpoint())
-                .basePath("/signin")
-                .body(payload, ObjectMapperType.GSON)
-                .accept(ContentType.JSON)
-                .contentType(ContentType.JSON).post().getBody().as(LoginPage.class, ObjectMapperType.GSON).getUsername();
-        actor.remember("current_username", userName);
+//        String userName = SerenityRest.given()
+//                .baseUri(getCurrentEndpoint())
+//                .basePath("/signin")
+//                .body(payload, ObjectMapperType.GSON)
+//                .accept(ContentType.JSON)
+//                .contentType(ContentType.JSON).post().getBody().as(LoginPage.class, ObjectMapperType.GSON).getUsername();
+//        actor.remember("current_username", userName);
 
         Response response = SerenityRest.given()
                 .baseUri(getCurrentEndpoint())
@@ -45,15 +48,28 @@ public class apiStepDefinitions {
 
         String token = response.getBody().jsonPath().getString("token");
         actor.remember("current_token", token);
+
+        String message = response.getBody().jsonPath().getString("message");
+        actor.remember("current_token", message);
+
+        String status = response.getBody().jsonPath().getString("status");
+        actor.remember("current_token", status);
     }
 
     @Then("{actor} should see the response authenticated successfully")
     public void userShouldSeeTheResponseAuthenticatedSuccessfully(Actor actor) {
-        actor.recall("current_username");
-
+//        actor.recall("current_username");
         String token = actor.recall("current_token");
-        System.out.println("Token: " + token);
+        String expectedMessage = "Logged in successfully!";
+        String expectedStatus = "success";
 
         SerenityRest.lastResponse().then().statusCode(200);
+
+        JsonPath responseBody = SerenityRest.lastResponse().jsonPath();
+        String actualMessage = responseBody.getString("message");
+        String actualStatus = responseBody.getString("status");
+
+        assertThat(actualMessage).as("Message is correct").isEqualTo(expectedMessage);
+        assertThat(actualStatus).as("Status is correct").isEqualTo(expectedStatus);
     }
 }
