@@ -41,29 +41,20 @@ public class apiStepDefinitions {
                 .accept(ContentType.JSON)
                 .contentType(ContentType.JSON)
                 .post();
-
-        String token = response.getBody().jsonPath().getString("token");
-        actor.remember("current_token", token);
-
-        String message = response.getBody().jsonPath().getString("message");
-        actor.remember("current_message", message);
-
-        String status = response.getBody().jsonPath().getString("status");
-        actor.remember("current_status", status);
     }
 
     @Then("{actor} should see the signin response authenticated successfully")
     public void userShouldSeeTheSigninResponseAuthenticatedSuccessfully(Actor actor) {
         String username = actor.recall("current_username");
         System.out.println("=======================Username: " + username);
-        String token = actor.recall("current_token");
-        System.out.println("=======================Token: " + token);
         String expectedMessage = "Logged in successfully!";
         String expectedStatus = "success";
 
         SerenityRest.lastResponse().then().statusCode(200);
 
         JsonPath responseBody = SerenityRest.lastResponse().jsonPath();
+        String token = responseBody.getString("token");
+        System.out.println("=======================Token: " + token);
         String actualMessage = responseBody.getString("message");
         String actualStatus = responseBody.getString("status");
 
