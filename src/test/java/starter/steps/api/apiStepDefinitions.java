@@ -10,7 +10,10 @@ import io.restassured.response.Response;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.rest.SerenityRest;
 import net.serenitybdd.screenplay.Actor;
+import starter.pages.API.DepositPage;
 import starter.pages.API.LoginPage;
+
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -68,8 +71,59 @@ public class apiStepDefinitions {
         assertThat(actualStatus).as("Status is correct").isEqualTo(expectedStatus);
     }
 
-    @When("{actor} deposit amount {double} into account {string}")
-    public void userDepositAmountIntoAcount(Actor actor, Double amount, String account) {
+    @When("{actor} deposit amount {string} into account {string}")
+    public void userDepositAmountIntoAcount(Actor actor, String amountStr, String account) {
+        Double amount = null;
+        String[] validAccountTypes = {"Primary", "Savings"};
 
+        try {
+            amount = Double.parseDouble(amountStr);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid amount format. Please provide a valid number.");
+            return;
+        }
+
+        if (Arrays.stream(validAccountTypes).map(String::toLowerCase).noneMatch(account.toLowerCase()::equals)) {
+            String validAccountTypesMessage = String.join("', '", validAccountTypes);
+            System.out.println("Invalid account type. Please provide either '" + validAccountTypesMessage + "'.");
+            return;
+        }
+
+        String username = actor.recall("current_username");
+        String token = actor.recall("current_token");
+
+        DepositPage payload = new DepositPage(username, account, amount);
+
+        Response response = SerenityRest.given()
+                .baseUri(getCurrentEndpoint())
+                .basePath("/deposit")
+                .header("Authorization", "Bearer " + token)
+                .body(payload, ObjectMapperType.GSON)
+                .accept(ContentType.JSON)
+                .contentType(ContentType.JSON)
+                .post();
+
+        Double balance = response.getBody().jsonPath().getDouble("balance");
+        actor.remember("current_balance", balance);
+
+//        String status = response.getBody().jsonPath().getString("status");
+//        actor.remember("current_status", status);
+    }
+
+    @Then("{actor} should see the deposit response authenticated successfully")
+    public void userShouldSeeTheDepositResponseAuthenticatedSuccessfully(Actor actor) {
+        Double balance = actor.recall("current_balance");
+        System.out.println("=======================Balance: " + balance);
+//        String status = actor.recall("current_status");
+        String expectedStatus = "success";
+
+        SerenityRest.lastResponse().then().statusCode(200);
+
+        // another method without using 'remember', 'recall' feature
+        JsonPath responseBody = SerenityRest.lastResponse().jsonPath();
+        String actualStatus = responseBody.getString("status");
+        System.out.println("=======================actualStatus: " + actualStatus);
+
+        assertThat(actualStatus).as("Status is correct").isEqualTo(expectedStatus);
     }
 }
