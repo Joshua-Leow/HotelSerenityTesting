@@ -81,7 +81,8 @@ public class apiStepDefinitions {
         }
 
         String username = actor.recall("current_username");
-        String token = actor.recall("current_token");
+        JsonPath responseBody = SerenityRest.lastResponse().jsonPath();
+        String token = responseBody.getString("token");
 
         DepositPage payload = new DepositPage(username, account, amount);
 
