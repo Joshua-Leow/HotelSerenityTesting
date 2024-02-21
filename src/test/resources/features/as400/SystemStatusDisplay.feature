@@ -18,7 +18,8 @@ Feature: System Status Display on AS400 Terminal
 
 	Scenario Outline: Login successfully to AS400
 		When User log in with username '<Username>' and password '<Password>'
-		Then User should see the text 'Display Messages' on the screen
+		Then User should see the text 'IBM i Main Menu' or 'Display Program Messages' on the screen
+		And User navigate to 'User tasks'
 		Examples:
 			| Username | Password |
 			| RHADI    | K$$ja01  |
