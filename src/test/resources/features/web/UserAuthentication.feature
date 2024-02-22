@@ -29,5 +29,21 @@ Feature: Web User Authentication
 			| user      | user     | 12345 | ab@cde | user999  | user01   |
 		# email and username cannot exist
 
+	Scenario Outline: Successfully Cancel User Registration
+		When User clicks Sign Up button
+		And User enters first name "<firstname>"
+		And User enters last name "<lastname>"
+		And User enters phone "<phone>"
+		And User enters email "<email>"
+		And User enters username "<username>"
+		And User enters password "<password>"
+		And User clicks Cancel Register button
+		Then User redirects to login page
+		When User clicks Sign Up button
+		And User clicks Cancel Register button
+		Then User redirects to login page
+		Examples:
+			| firstname | lastname | phone | email  | username | password |
+			| user      | user     | 12345 | ab@cde | user999  | user01   |
 # mvn clean verify "-Dproperties=serenity.properties -Dcucumber.filter.tags=@web"
 # mvn clean verify "-Dproperties=serenity.properties -Dcucumber.filter.tags=not @mobile"

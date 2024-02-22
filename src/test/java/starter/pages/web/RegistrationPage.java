@@ -11,6 +11,6 @@ public class RegistrationPage {
     public static Target PASSWORD_FIELD = Target.the("Password").locatedBy("#password");
     public static Target SHOWPASSWORD_CHECKBOX = Target.the("Show Password").locatedBy("#showPassword");
     public static Target SIGNUP_BUTTON = Target.the("Sign Up").locatedBy("//button[@type='submit']");
-    public static Target CANCEL_BUTTON = Target.the("Cancel").locatedBy("#//a[@class='btn btn-info btn-lg btn-block login-button']");
+    public static Target CANCEL_BUTTON = Target.the("Cancel").locatedBy("//a[@class='btn btn-info btn-lg btn-block login-button']");
 
 }

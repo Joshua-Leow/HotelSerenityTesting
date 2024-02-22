@@ -116,4 +116,11 @@ public class webStepDefinitions {
                 Ensure.that(TheWebPage.currentUrl()).containsIgnoringCase("index")
         );
     }
+
+    @And("{actor} clicks Cancel Register button")
+    public void userClicksCancelRegisterButton(Actor actor) {
+        actor.attemptsTo(
+                RegisterActions.clickCancelRegister()
+        );
+    }
 }
