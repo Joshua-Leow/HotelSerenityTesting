@@ -13,6 +13,9 @@ import starter.actions.as400.CheckTextFromTerminal;
 import starter.actions.as400.InitializeTerminalSession;
 import starter.actions.as400.LoginToTerminal;
 import starter.actions.as400.NavigateOnTerminal;
+
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class terminalStepDefinitions {
@@ -63,8 +66,8 @@ public class terminalStepDefinitions {
         );
     }
 
-    @Then("{actor} should see the text {string} or {string} on the screen")
-    public void userShouldSeeTheTextOrOnTheScreen(Actor actor, String text1, String text2) {
+    @Then("{actor} should see the text {string} or text {string} on the screen")
+    public void userShouldSeeTheTextOrTextOnTheScreen(Actor actor, String text1, String text2) {
         actor.attemptsTo(CheckTextFromTerminal.to(text1));
         boolean text1Exists = new CheckTextFromTerminal(text1).isStringExist();
         System.out.println("Text '" + text1 + "' exists on the screen: " + text1Exists);
@@ -83,5 +86,15 @@ public class terminalStepDefinitions {
             }
         }
         assertThat(anyTextExists).isTrue();
+    }
+
+    @Then("{actor} should see the following options on the screen:")
+    public void userShouldSeeTheItemsOnTheScreen(Actor actor, List<String> searchString) {
+        for (String text_to_search: searchString) {
+            System.out.println("==================== Current text ==================" + text_to_search);
+            actor.attemptsTo(
+                    CheckTextFromTerminal.to(text_to_search)
+            );
+        }
     }
 }

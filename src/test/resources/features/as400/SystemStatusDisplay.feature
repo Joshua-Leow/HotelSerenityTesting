@@ -18,7 +18,7 @@ Feature: System Status Display on AS400 Terminal
 
 	Scenario Outline: Login successfully to AS400
 		When User log in with username '<Username>' and password '<Password>'
-		Then User should see the text 'IBM i Main Menu' or 'Display Program Messages' on the screen
+		Then User should see the text 'IBM i Main Menu' or text 'Display Messages' on the screen
 		And User navigate to 'User tasks'
 		Examples:
 			| Username | Password |
@@ -28,7 +28,33 @@ Feature: System Status Display on AS400 Terminal
 		When User log in with username '<Username>' and password '<Password>'
 		Then User should see the text 'does not exist or password not correct for user profile' on the screen
 #		CPF1120 - User TEST does not exist or password not correct for user profile.
-
 		Examples:
 			| Username | Password |
 			| TEST     | TEST123  |
+
+	Scenario Outline: Verify display of job status attributes
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'Display or Change your Job'
+		And User navigate to 'Display job status attributes'
+		Then User should see the following options on the screen:
+			| System:   PUB400                                             |
+			| Job:   QPAD025219     User:   RHADI        Number:   923435  |
+			| Status of job . . . . . . . . . . . . . . . :   ACTIVE       |
+			| Current user profile  . . . . . . . . . . . :   RHADI        |
+			| Job user identity . . . . . . . . . . . . . :   RHADI        |
+			| Set by  . . . . . . . . . . . . . . . . . . :     *DEFAULT   |
+			| Entered system:                                              |
+			|   Date  . . . . . . . . . . . . . . . . . . :   02/21/24     |
+			|   Time  . . . . . . . . . . . . . . . . . . :   02:53:02     |
+			| Started:                                                     |
+			|   Date  . . . . . . . . . . . . . . . . . . :   02/21/24     |
+			|   Time  . . . . . . . . . . . . . . . . . . :   02:53:02     |
+			| Subsystem . . . . . . . . . . . . . . . . . :   QINTER2      |
+			|   Subsystem pool ID . . . . . . . . . . . . :     2          |
+			| Type of job . . . . . . . . . . . . . . . . :   INTER        |
+			| Special environment . . . . . . . . . . . . :   *NONE        |
+			| Program return code . . . . . . . . . . . . :   0            |
+		Examples:
+			| Username | Password |
+			| RHADI     | K$$ja01  |
