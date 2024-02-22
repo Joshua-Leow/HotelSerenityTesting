@@ -5,6 +5,7 @@ Feature: Mobile User Authentication
 	Background:
 		Given User is on the mobile login page
 
+#	REG_TC02
 	Scenario Outline: Successful User Registration
 		When User clicks Sign Up button on the mobile
 		And User enters first name "<firstname>" on the mobile
@@ -20,6 +21,7 @@ Feature: Mobile User Authentication
 			| user      | user     | 12345 | ab@cde | user01   | user01   |
 		# email and username cannot exist
 
+#	LOGIN_TC01
 	Scenario Outline: Successful User Authentication
 		When User input username '<Username>' and password '<Password>' on the mobile
 		And User submit the login form on the mobile

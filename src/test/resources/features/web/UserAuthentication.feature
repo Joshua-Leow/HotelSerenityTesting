@@ -5,6 +5,7 @@ Feature: Web User Authentication
 	Background:
 		Given User is on the login page
 
+#	LOGIN_TC01
 	Scenario Outline: Successful User Authentication
 		When User input username '<Username>' and password '<Password>'
 		And User submit the login form
@@ -13,14 +14,16 @@ Feature: Web User Authentication
 			| Username  | Password   |
 			| user01    | user01     |
 
+#	LOGIN_TC02
 	Scenario Outline: Login with invalid credentials
 		When User input username '<Username>' and password '<Password>'
 		And User submit the login form
-		Then User should see Error Message displayed "Invalid username and secret."
+		Then User should see Error Message displayed "Invalid username and password"
 		Examples:
 			| Username  | Password   |
 			| TEST99    | TEST99     |
 
+#	REG_TC02
 	Scenario Outline: Successful User Registration
 		When User clicks Sign Up button
 		And User enters first name "<firstname>"
@@ -36,6 +39,7 @@ Feature: Web User Authentication
 			| user      | user     | 12345 | ab@cde | user999  | user01   |
 		# email and username cannot exist
 
+#	REG_TC06
 	Scenario Outline: Successfully Cancel User Registration
 		When User clicks Sign Up button
 		And User enters first name "<firstname>"

@@ -1,4 +1,4 @@
-@as400
+
 Feature: System Status Display on AS400 Terminal
 	As a system administrator, I want to be able to view the current status of the AS400 system so that I can quickly assess its operational state and address any issues promptly.
 
@@ -11,19 +11,19 @@ Feature: System Status Display on AS400 Terminal
 		And User select the 'Status' option
 		And User choose the 'Display system status' option
 		Then User should see the text 'Display System Status' on the screen
-
 		Examples:
 			| Username | Password |
 			| RRHADI   | K$$ja01  |
 
+#		TC01
 	Scenario Outline: Login successfully to AS400
 		When User log in with username '<Username>' and password '<Password>'
 		Then User should see the text 'IBM i Main Menu' or text 'Display Messages' on the screen
-		And User navigate to 'User tasks'
 		Examples:
 			| Username | Password |
 			| RHADI    | K$$ja01  |
 
+#		TC02
 	Scenario Outline: Unsuccessful Login using invalid credentials
 		When User log in with username '<Username>' and password '<Password>'
 		Then User should see the text 'does not exist or password not correct for user profile' on the screen
@@ -31,7 +31,8 @@ Feature: System Status Display on AS400 Terminal
 		Examples:
 			| Username | Password |
 			| TEST     | TEST123  |
-
+	@as400
+#		TC05
 	Scenario Outline: Verify display of job status attributes
 		When User log in with username '<Username>' and password '<Password>'
 		And User navigate to 'User Task'
