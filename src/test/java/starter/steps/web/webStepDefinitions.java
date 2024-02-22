@@ -5,7 +5,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.ensure.Ensure;
+import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.questions.page.TheWebPage;
 import starter.actions.web.LoginActions;
 import starter.actions.web.RegisterActions;
@@ -51,6 +53,15 @@ public class webStepDefinitions {
     public void userShouldBeAuthenticatedSuccessfully(Actor actor) {
         actor.should(
                 seeThat(HomePageQuestions.isPrimaryAccountViewDetailsButtonVisible())
+        );
+    }
+
+    @Then("{actor} should see Error Message displayed {string}")
+    public void userShouldSeeErrorMessageDisplayed(Actor actor, String input) {
+        String pageSource = (String) BrowseTheWeb.as(actor).evaluateJavascript("return document.documentElement.outerHTML");
+        actor.attemptsTo(
+                Ensure.that(TheWebPage.currentUrl()).containsIgnoringCase("error"),
+                Ensure.that(pageSource).containsIgnoringCase(input)
         );
     }
 

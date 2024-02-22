@@ -9,10 +9,17 @@ Feature: Web User Authentication
 		When User input username '<Username>' and password '<Password>'
 		And User submit the login form
 		Then User should be authenticated successfully
-
 		Examples:
 			| Username  | Password   |
 			| user01    | user01     |
+
+	Scenario Outline: Login with invalid credentials
+		When User input username '<Username>' and password '<Password>'
+		And User submit the login form
+		Then User should see Error Message displayed "Invalid username and secret."
+		Examples:
+			| Username  | Password   |
+			| TEST99    | TEST99     |
 
 	Scenario Outline: Successful User Registration
 		When User clicks Sign Up button
