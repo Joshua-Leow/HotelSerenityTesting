@@ -70,11 +70,11 @@ public class terminalStepDefinitions {
     public void userShouldSeeTheTextOrTextOnTheScreen(Actor actor, String text1, String text2) {
         actor.attemptsTo(CheckTextFromTerminal.to(text1));
         boolean text1Exists = new CheckTextFromTerminal(text1).isStringExist();
-        System.out.println("Text '" + text1 + "' exists on the screen: " + text1Exists);
+        System.out.println("====================Text '" + text1 + "' exists on the screen: " + text1Exists);
 
         actor.attemptsTo(CheckTextFromTerminal.to(text2));
         boolean text2Exists = new CheckTextFromTerminal(text2).isStringExist();
-        System.out.println("Text '" + text2 + "' exists on the screen: " + text2Exists);
+        System.out.println("====================Text '" + text2 + "' exists on the screen: " + text2Exists);
 
         boolean[] textExists = {text1Exists, text2Exists};
 
@@ -92,9 +92,9 @@ public class terminalStepDefinitions {
     public void userShouldSeeTheItemsOnTheScreen(Actor actor, List<String> searchString) {
         for (String text_to_search: searchString) {
             System.out.println("==================== Current text ==================" + text_to_search);
-            actor.attemptsTo(
-                    CheckTextFromTerminal.to(text_to_search)
-            );
+            actor.attemptsTo(CheckTextFromTerminal.to(text_to_search));
+            boolean textExist = new CheckTextFromTerminal(text_to_search).isStringExist();
+            assertThat(textExist).isTrue();
         }
     }
 }
