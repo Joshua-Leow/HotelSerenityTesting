@@ -28,7 +28,9 @@ public class CheckTextFromTerminal implements Task {
     public <T extends Actor> void performAs(T actor) {
         TerminalSessionState sessionState = actor.recall("TERMINAL_SESSION");
         TerminalSessionManager sessionManager = sessionState.getSessionManager();
-        String output = sessionManager.screenContents();
+        String output = sessionManager.screenContents().replace('\0',' ');
+//        System.out.println("========== output ====================\n" + output);
+//        Assertions.assertTrue(output.contains(searchString));
         stringExist = output.contains(searchString);
         sessionManager.dumpScreen();
     }

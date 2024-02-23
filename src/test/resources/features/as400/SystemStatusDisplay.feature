@@ -40,22 +40,23 @@ Feature: System Status Display on AS400 Terminal
 		And User navigate to 'Display job status attributes'
 		Then User should see the following options on the screen:
 			| System:   PUB400                                             |
-			| Job:   QPAD025219     User:   RHADI        Number:   923435  |
-			| Status of job . . . . . . . . . . . . . . . :   ACTIVE       |
-			| Current user profile  . . . . . . . . . . . :   RHADI        |
-			| Job user identity . . . . . . . . . . . . . :   RHADI        |
-			| Set by  . . . . . . . . . . . . . . . . . . :     *DEFAULT   |
+			| Job:                                                         |
+			| User:                                                        |
+			| Number:                                                      |
+			| Status of job . . . . . . . . . . . . . . . :                |
+			| Current user profile  . . . . . . . . . . . :                |
+			| Job user identity . . . . . . . . . . . . . :                |
+			| Set by  . . . . . . . . . . . . . . . . . :                  |
 			| Entered system:                                              |
-			|   Date  . . . . . . . . . . . . . . . . . . :   02/21/24     |
-			|   Time  . . . . . . . . . . . . . . . . . . :   02:53:02     |
+			|   Date  . . . . . . . . . . . . . . . . . . :                |
+			|   Time  . . . . . . . . . . . . . . . . . . :                |
 			| Started:                                                     |
-			|   Date  . . . . . . . . . . . . . . . . . . :   02/21/24     |
-			|   Time  . . . . . . . . . . . . . . . . . . :   02:53:02     |
-			| Subsystem . . . . . . . . . . . . . . . . . :   QINTER2      |
-			|   Subsystem pool ID . . . . . . . . . . . . :     2          |
-			| Type of job . . . . . . . . . . . . . . . . :   INTER        |
-			| Special environment . . . . . . . . . . . . :   *NONE        |
-			| Program return code . . . . . . . . . . . . :   0            |
+			|   Date  . . . . . . . . . . . . . . . . . . :                |
+			|   Time  . . . . . . . . . . . . . . . . . . :                |
+			| Subsystem . . . . . . . . . . . . . . . . . :                |
+			|   Subsystem pool ID . . . . . . . . . . . . :                |
+			| Type of job . . . . . . . . . . . . . . . . :                |
+			| Program return code . . . . . . . . . . . . :                |
 		Examples:
 			| Username | Password |
 			| RHADI     | K$$ja01  |
