@@ -279,6 +279,11 @@ Run all except AS400 Feature Files
 $ mvn clean verify "-Dcucumber.filter.tags=not @as400"
 ```
 
+Run all except Mobile Feature Files
+```json
+$ mvn clean verify -Dwebdriver.driver=appium -Dcucumber.filter.tags=@mobile
+```
+
 See [**this article**](https://johnfergusonsmart.com/environment-specific-configuration-in-serenity-bdd/) for more details about this feature.
 
 ## Want to learn more?
