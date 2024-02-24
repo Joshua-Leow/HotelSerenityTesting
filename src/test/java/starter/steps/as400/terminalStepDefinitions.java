@@ -6,15 +6,18 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.screenplay.Actor;
-import starter.actions.as400.CheckTextFromTerminal;
-import starter.actions.as400.InitializeTerminalSession;
-import starter.actions.as400.LoginToTerminal;
-import starter.actions.as400.NavigateOnTerminal;
+import starter.actions.as400.*;
 
 public class terminalStepDefinitions {
     @Given("{actor} is connected to the AS400 terminal")
     public void userConnectedToTheASTerminal(Actor actor) {
         String environment = "environments." + Serenity.environmentVariables().getProperty("environment", "default");
+        // Check if there is an existing session and terminate it
+        if (actor.recall("TERMINAL_SESSION") != null) {
+            TerminalSessionState existingSession = actor.recall("TERMINAL_SESSION");
+            existingSession.getSessionManager().terminate(); // Ensure this method exists and properly terminates the session
+            actor.forget("TERMINAL_SESSION"); // Forget the existing session state
+        }
         actor.attemptsTo(
                 InitializeTerminalSession.withDetails(
                         Serenity.environmentVariables().getProperty(environment + ".as400.host"),

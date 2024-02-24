@@ -20,6 +20,7 @@ public class TerminalSessionManager {
 
     private static final Logger LOG = Logger.getLogger(TerminalSessionManager.class);
     private final Properties properties = new Properties();
+    private Session5250 session;
     private volatile Screen5250 screen;
     private volatile boolean informed = false;
 
@@ -33,7 +34,12 @@ public class TerminalSessionManager {
     // Connects to the terminal session and initializes the screen object.
     public void connect() {
         CompletableFuture<Void> future = new CompletableFuture<>();
-        Session5250 session = SessionManager.instance().openSession(properties, null, null);
+        if (SessionManager.instance().getSessions().getCount() == 0) {
+            session = SessionManager.instance().openSession(properties, null, null);
+        }
+        else {
+            session = SessionManager.instance().getSessions().item(0);
+        }
         session.addSessionListener(changeEvent -> {
             if (changeEvent.getState() == TN5250jConstants.STATE_CONNECTED) {
                 future.complete(null); // Signal completion of connection.
@@ -225,5 +231,26 @@ public class TerminalSessionManager {
             return this;
         }
         throw new IllegalStateException("No current field selected to fill");
+    }
+
+    public void terminate() {
+        if (screen != null) {
+            // If there's an active screen, we might need to perform some cleanup actions
+            // specific to your application's logic before closing the session.
+            // For example, you might want to navigate to a safe screen or log out properly.
+            // This part is highly application-specific and might not be needed in all cases.
+
+            // Example cleanup action: navigate to the main menu or log out
+            // sendKeys("[pf3]"); // Assuming PF3 takes you back or logs you out
+            // waitForUnlock();  // Wait for the screen to unlock after action
+        }
+
+        if (session != null && session.isConnected()) {
+            session.disconnect(); // This will close the session
+            session = null; // Help garbage collection by nullifying the session reference
+            LOG.info("Terminal session terminated successfully.");
+        } else {
+            LOG.warn("No active session to terminate or the session is already disconnected.");
+        }
     }
 }
