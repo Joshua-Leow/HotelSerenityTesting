@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.questions.page.TheWebPage;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -39,6 +40,15 @@ public class mobileStepDefinitions {
     public void userShouldBeAuthenticatedSuccessfullyOnTheMobile(Actor actor) {
         actor.should(
                 seeThat(HomePageQuestions.isPrimaryAccountViewDetailsButtonVisible())
+        );
+    }
+
+    @Then("{actor} should see Error Message displayed {string} on the mobile")
+    public void userShouldSeeErrorMessageDisplayedOnTheMobile(Actor actor, String input) {
+        String pageSource = (String) BrowseTheWeb.as(actor).evaluateJavascript("return document.documentElement.outerHTML");
+        actor.attemptsTo(
+                Ensure.that(TheWebPage.currentUrl()).containsIgnoringCase("error"),
+                Ensure.that(pageSource).containsIgnoringCase(input)
         );
     }
 
@@ -95,6 +105,13 @@ public class mobileStepDefinitions {
     public void userClicksSignUpRegisterButtonOnTheMobile(Actor actor) {
         actor.attemptsTo(
                 RegisterActions.clickSignUp()
+        );
+    }
+
+    @And("{actor} clicks Cancel Register button on the mobile")
+    public void userClicksCancelRegisterButtonOnTheMobile(Actor actor) {
+        actor.attemptsTo(
+                RegisterActions.clickCancelRegister()
         );
     }
 
