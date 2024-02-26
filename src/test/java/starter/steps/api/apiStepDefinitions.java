@@ -62,6 +62,21 @@ public class apiStepDefinitions {
         assertThat(actualStatus).as("Status is correct").isEqualTo(expectedStatus);
     }
 
+    @Then("{actor} should see the signin response failed")
+    public void userShouldSeeTheSigninResponseFailed(Actor actor) {
+        String expectedMessage = "Invalid username or password";
+        String expectedStatus = "fail";
+
+        SerenityRest.lastResponse().then().statusCode(401);
+
+        JsonPath responseBody = SerenityRest.lastResponse().jsonPath();
+        String actualMessage = responseBody.getString("message");
+        String actualStatus = responseBody.getString("status");
+
+        assertThat(actualMessage).as("Message is correct").isEqualTo(expectedMessage);
+        assertThat(actualStatus).as("Status is correct").isEqualTo(expectedStatus);
+    }
+
     @When("{actor} deposit amount {string} into account {string}")
     public void userDepositAmountIntoAcount(Actor actor, String amountStr, String account) {
         Double amount = null;
