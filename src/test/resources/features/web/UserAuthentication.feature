@@ -9,6 +9,7 @@ Feature: Web User Authentication
 		When User input username '<Username>' and password '<Password>'
 		And User submit the login form
 		Then User should be authenticated successfully
+		Then User should be able to see the record '<Username>' in the Users table in the database
 
 		Examples:
 			| Username  | Password   |
