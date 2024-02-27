@@ -5,13 +5,16 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.questions.page.TheWebPage;
+import starter.actions.web.HomeActions;
 import starter.actions.web.LoginActions;
 import starter.actions.web.RegisterActions;
 import starter.questions.HomePageQuestions;
+import starter.questions.PrimaryPageQuestions;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 
@@ -132,6 +135,23 @@ public class webStepDefinitions {
     public void userClicksCancelRegisterButton(Actor actor) {
         actor.attemptsTo(
                 RegisterActions.clickCancelRegister()
+        );
+    }
+
+    @When("{actor} clicks Primary Balance View Details")
+    public void userClicksPrimaryBalanceViewDetails(Actor actor) {
+        actor.attemptsTo(
+                HomeActions.navigateToPrimaryAccountViewDetails()
+        );
+    }
+
+    @Then("{actor} should see Primary Balance page")
+    public void userShouldSeePrimaryBalancePage(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(TheWebPage.currentUrl()).containsIgnoringCase("account/primaryAccount")
+        );
+        actor.should(
+                seeThat(PrimaryPageQuestions.isPrimaryAccountViewDetailsVisible())
         );
     }
 }

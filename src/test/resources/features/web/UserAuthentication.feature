@@ -1,4 +1,4 @@
-@web
+
 Feature: Web User Authentication
 	As a registered user, I want to authenticate successfully so that I can access my account and perform actions within the system.
 
@@ -56,5 +56,29 @@ Feature: Web User Authentication
 		Examples:
 			| firstname | lastname | phone | email  | username | password |
 			| user      | user     | 12345 | ab@cde | user999  | user01   |
+
+		#	PRIMARY_TC01
+	Scenario Outline: View Primary Balance Page
+		When User input username '<Username>' and password '<Password>'
+		And User submit the login form
+		Then User should be authenticated successfully
+		When User clicks Primary Balance View Details
+		Then User should see Primary Balance page
+		Examples:
+			| Username  | Password   |
+			| user99    | user99     |
+
+  		#	PRIMARY_TC02
+	@web
+	Scenario Outline: Sort Primary Balance table
+		When User input username '<Username>' and password '<Password>'
+		And User submit the login form
+		Then User should be authenticated successfully
+		When User clicks Primary Balance View Details
+		Then User should see Primary Balance page
+		#add steps to sort
+		Examples:
+			| Username  | Password   |
+			| user99    | user99     |
 # mvn clean verify "-Dproperties=serenity.properties -Dcucumber.filter.tags=@web"
 # mvn clean verify "-Dproperties=serenity.properties -Dcucumber.filter.tags=not @mobile"
