@@ -57,4 +57,15 @@ Feature: Mobile User Authentication
 			| firstname | lastname | phone | email  | username | password |
 			| user      | user     | 12345 | ab@cde | user999  | user01   |
 
+	#	PRIMARY_TC01
+	Scenario Outline: View Primary Balance Page
+		When User input username '<Username>' and password '<Password>' on the mobile
+		And User submit the login form on the mobile
+		Then User should be authenticated successfully on the mobile
+		When User clicks Primary Balance View Details on the mobile
+		Then User should see Primary Balance page on the mobile
+		Examples:
+			| Username  | Password   |
+			| TEST99    | TEST99     |
+
 # mvn clean verify -Dwebdriver.driver=appium -Dcucumber.filter.tags=@mobile

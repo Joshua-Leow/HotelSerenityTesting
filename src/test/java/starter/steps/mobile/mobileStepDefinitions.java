@@ -10,9 +10,12 @@ import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.questions.page.TheWebPage;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import starter.actions.web.HomeActions;
 import starter.actions.web.LoginActions;
 import starter.actions.web.RegisterActions;
 import starter.questions.HomePageQuestions;
+import starter.questions.PrimaryPageQuestions;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
@@ -119,6 +122,23 @@ public class mobileStepDefinitions {
     public void userRedirectsToLoginPageOnTheMobile(Actor actor) {
         actor.attemptsTo(
                 Ensure.that(TheWebPage.currentUrl()).containsIgnoringCase("index")
+        );
+    }
+
+    @When("{actor} clicks Primary Balance View Details on the mobile")
+    public void userClicksPrimaryBalanceViewDetailsOnTheMobile(Actor actor) {
+        actor.attemptsTo(
+                HomeActions.navigateToPrimaryAccountViewDetails()
+        );
+    }
+
+    @Then("{actor} should see Primary Balance page on the  mobile")
+    public void userShouldSeePrimaryBalancePageOnTheMobile(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(TheWebPage.currentUrl()).containsIgnoringCase("account/primaryAccount")
+        );
+        actor.should(
+                seeThat(PrimaryPageQuestions.isPrimaryAccountViewDetailsVisible())
         );
     }
 }
