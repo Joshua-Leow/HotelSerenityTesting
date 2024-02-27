@@ -54,7 +54,7 @@ public class databaseStepDefinitions {
     }
 
     @Then("{actor} should be able to see the record {string} in the Users table in the database")
-    public void userShouldBeAbleToSeeTheRecordUsernameInTheUsersTableInTheDatabase(Actor actor, String email) {
-        checkUserExists(email);
+    public void userShouldBeAbleToSeeTheRecordUsernameInTheUsersTableInTheDatabase(Actor actor, String user_id) {
+        checkUserExists(user_id);
     }
 }
