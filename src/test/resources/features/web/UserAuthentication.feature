@@ -106,13 +106,31 @@ Feature: Web User Authentication
 			| !@#$%^&*( | !@#$%^&*( | !@#$%^&*( | !@#$%^&*( | !@#$%^&*( | !@#$%^&*( |
 			| 123456789 | 123456789 | 123456789 | 123456789 | 123456789 | 123456789 |
 			| qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio |
-	@web
+
 		#	REG_TC04
 	Scenario: Show password
 		When User clicks Sign Up button
 		And User enters password "qwerty"
 		And User clicks show password
 		Then User should see password not masked
+	@web
+		# 	REG_TC08
+	Scenario Outline: Register Existing User
+		When User clicks Sign Up button
+		And User enters first name "<firstname>"
+		And User enters last name "<lastname>"
+		And User enters phone "<phone>"
+		And User enters email "<email>"
+		And User enters username "<username>"
+		And User enters password "<password>"
+		And User clicks Sign Up Register button
+		Then User should see existing error message
+		Examples:
+			| firstname | lastname  | phone     | email     | username  | password  |
+			| 123456789 | 123456789 | 123456789 | 123456789 | enfeimedo | 123456789 |
+			| 123456789 | 123456789 | 123456789 | jnwreuhfe | 123456789 | 123456789 |
+			| qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio |
+			| asdfghjkl | asdfghjkl | asdfghjkl | asdfghjkl | asdfghjkl | asdfghjkl |
 
 # mvn clean verify "-Dproperties=serenity.properties -Dcucumber.filter.tags=@web"
 # mvn clean verify "-Dproperties=serenity.properties -Dcucumber.filter.tags=not @mobile"

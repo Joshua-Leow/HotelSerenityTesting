@@ -19,6 +19,7 @@ import starter.questions.LoginPageQuestions;
 import starter.questions.PrimaryPageQuestions;
 import starter.questions.RegistrationPageQuestions;
 
+import static org.hamcrest.CoreMatchers.anyOf;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 
 public class webStepDefinitions {
@@ -209,5 +210,13 @@ public class webStepDefinitions {
         actor.should(
                 seeThat(RegistrationPageQuestions.isPasswordMasked(), Matchers.equalTo(false))
         );
+    }
+
+    @Then("{actor} should see existing error message")
+    public void userShouldSeeExistingErrorMessage(Actor actor) {
+        actor.should(
+                seeThat(RegistrationPageQuestions.isEmailOrUsernameExistMessageVisible())
+        );
+
     }
 }
