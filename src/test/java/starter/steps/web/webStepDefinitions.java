@@ -5,11 +5,18 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.Performable;
+import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.ensure.Ensure;
+import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.questions.page.TheWebPage;
+import starter.actions.web.HomeActions;
 import starter.actions.web.LoginActions;
 import starter.actions.web.RegisterActions;
 import starter.questions.HomePageQuestions;
+import starter.questions.LoginPageQuestions;
+import starter.questions.PrimaryPageQuestions;
+import starter.questions.RegistrationPageQuestions;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 
@@ -51,6 +58,15 @@ public class webStepDefinitions {
     public void userShouldBeAuthenticatedSuccessfully(Actor actor) {
         actor.should(
                 seeThat(HomePageQuestions.isPrimaryAccountViewDetailsButtonVisible())
+        );
+    }
+
+    @Then("{actor} should see Error Message displayed {string}")
+    public void userShouldSeeErrorMessageDisplayed(Actor actor, String input) {
+        String pageSource = (String) BrowseTheWeb.as(actor).evaluateJavascript("return document.documentElement.outerHTML");
+        actor.attemptsTo(
+                Ensure.that(TheWebPage.currentUrl()).containsIgnoringCase("error"),
+                Ensure.that(pageSource).containsIgnoringCase(input)
         );
     }
 
@@ -114,6 +130,58 @@ public class webStepDefinitions {
     public void userRedirectsToLoginPage(Actor actor) {
         actor.attemptsTo(
                 Ensure.that(TheWebPage.currentUrl()).containsIgnoringCase("index")
+        );
+    }
+
+    @And("{actor} clicks Cancel Register button")
+    public void userClicksCancelRegisterButton(Actor actor) {
+        actor.attemptsTo(
+                RegisterActions.clickCancelRegister()
+        );
+    }
+
+    @When("{actor} clicks Primary Balance View Details")
+    public void userClicksPrimaryBalanceViewDetails(Actor actor) {
+        actor.attemptsTo(
+                HomeActions.navigateToPrimaryAccountViewDetails()
+        );
+    }
+
+    @Then("{actor} should see Primary Balance page")
+    public void userShouldSeePrimaryBalancePage(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(TheWebPage.currentUrl()).containsIgnoringCase("account/primaryAccount")
+        );
+        actor.should(
+                seeThat(PrimaryPageQuestions.isPrimaryAccountViewDetailsVisible())
+        );
+    }
+
+    @Then("{actor} should see sign in elements")
+    public void userShouldSeeSignInElements(Actor actor) {
+        actor.should(
+                seeThat(LoginPageQuestions.isCloudBankLogoVisible()),
+                seeThat(LoginPageQuestions.isSignInLablelVisible()),
+                seeThat(LoginPageQuestions.isUsernameFieldVisible()),
+                seeThat(LoginPageQuestions.isPasswordFieldVisible()),
+                seeThat(LoginPageQuestions.isRememberMeCheckboxVisible()),
+                seeThat(LoginPageQuestions.isSignInButtonVisible()),
+                seeThat(LoginPageQuestions.isSignUpButtonVisible())
+        );
+    }
+
+    @Then("{actor} should see sign up elements")
+    public void userShouldSeeSignUpElements(Actor actor) {
+        actor.should(
+                seeThat(RegistrationPageQuestions.isFirstNameFieldVisible()),
+                seeThat(RegistrationPageQuestions.isLastNameFieldVisible()),
+                seeThat(RegistrationPageQuestions.isPhoneFieldVisible()),
+                seeThat(RegistrationPageQuestions.isEmailFieldVisible()),
+                seeThat(RegistrationPageQuestions.isUsernameFieldVisible()),
+                seeThat(RegistrationPageQuestions.isPasswordFieldVisible()),
+                seeThat(RegistrationPageQuestions.isShowPasswordCheckboxVisible()),
+                seeThat(RegistrationPageQuestions.isSignUpButtonVisible()),
+                seeThat(RegistrationPageQuestions.isCancelButtonVisible())
         );
     }
 }

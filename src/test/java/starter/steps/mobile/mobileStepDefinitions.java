@@ -6,12 +6,16 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.questions.page.TheWebPage;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import starter.actions.web.HomeActions;
 import starter.actions.web.LoginActions;
 import starter.actions.web.RegisterActions;
 import starter.questions.HomePageQuestions;
+import starter.questions.PrimaryPageQuestions;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
@@ -39,6 +43,15 @@ public class mobileStepDefinitions {
     public void userShouldBeAuthenticatedSuccessfullyOnTheMobile(Actor actor) {
         actor.should(
                 seeThat(HomePageQuestions.isPrimaryAccountViewDetailsButtonVisible())
+        );
+    }
+
+    @Then("{actor} should see Error Message displayed {string} on the mobile")
+    public void userShouldSeeErrorMessageDisplayedOnTheMobile(Actor actor, String input) {
+        String pageSource = (String) BrowseTheWeb.as(actor).evaluateJavascript("return document.documentElement.outerHTML");
+        actor.attemptsTo(
+                Ensure.that(TheWebPage.currentUrl()).containsIgnoringCase("error"),
+                Ensure.that(pageSource).containsIgnoringCase(input)
         );
     }
 
@@ -98,10 +111,34 @@ public class mobileStepDefinitions {
         );
     }
 
+    @And("{actor} clicks Cancel Register button on the mobile")
+    public void userClicksCancelRegisterButtonOnTheMobile(Actor actor) {
+        actor.attemptsTo(
+                RegisterActions.clickCancelRegister()
+        );
+    }
+
     @Then("{actor} redirects to login page on the mobile")
     public void userRedirectsToLoginPageOnTheMobile(Actor actor) {
         actor.attemptsTo(
                 Ensure.that(TheWebPage.currentUrl()).containsIgnoringCase("index")
+        );
+    }
+
+    @When("{actor} clicks Primary Balance View Details on the mobile")
+    public void userClicksPrimaryBalanceViewDetailsOnTheMobile(Actor actor) {
+        actor.attemptsTo(
+                HomeActions.navigateToPrimaryAccountViewDetails()
+        );
+    }
+
+    @Then("{actor} should see Primary Balance page on the  mobile")
+    public void userShouldSeePrimaryBalancePageOnTheMobile(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(TheWebPage.currentUrl()).containsIgnoringCase("account/primaryAccount")
+        );
+        actor.should(
+                seeThat(PrimaryPageQuestions.isPrimaryAccountViewDetailsVisible())
         );
     }
 }

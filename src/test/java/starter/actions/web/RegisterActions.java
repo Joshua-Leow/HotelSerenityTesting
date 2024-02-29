@@ -53,4 +53,10 @@ public class RegisterActions {
                 Click.on(RegistrationPage.SIGNUP_BUTTON)
         );
     }
+
+    public static Performable clickCancelRegister() {
+        return Task.where("{0} clicks Cancel Register button",
+                Click.on(RegistrationPage.CANCEL_BUTTON)
+        );
+    }
 }

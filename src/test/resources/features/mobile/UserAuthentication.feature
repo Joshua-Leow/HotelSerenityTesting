@@ -5,6 +5,7 @@ Feature: Mobile User Authentication
 	Background:
 		Given User is on the mobile login page
 
+#	REG_TC02
 	Scenario Outline: Successful User Registration
 		When User clicks Sign Up button on the mobile
 		And User enters first name "<firstname>" on the mobile
@@ -17,9 +18,10 @@ Feature: Mobile User Authentication
 		Then User redirects to login page on the mobile
 		Examples:
 			| firstname | lastname | phone | email  | username | password |
-			| user      | user     | 12345 | ab@cde | user01   | user01   |
+			| user      | user     | 12345 | az@jkk | user98   | user99   |
 		# email and username cannot exist
 
+#	LOGIN_TC01
 	Scenario Outline: Successful User Authentication
 		When User input username '<Username>' and password '<Password>' on the mobile
 		And User submit the login form on the mobile
@@ -27,5 +29,43 @@ Feature: Mobile User Authentication
 		Examples:
 			| Username | Password |
 			| user01   | user01   |
+
+#	LOGIN_TC02
+	Scenario Outline: Login with invalid credentials
+		When User input username '<Username>' and password '<Password>' on the mobile
+		And User submit the login form on the mobile
+		Then User should see Error Message displayed "Invalid username and password" on the mobile
+		Examples:
+			| Username  | Password   |
+			| TEST99    | TEST99     |
+
+	#	REG_TC06
+	Scenario Outline: Successfully Cancel User Registration
+		When User clicks Sign Up button on the mobile
+		And User enters first name "<firstname>" on the mobile
+		And User enters last name "<lastname>" on the mobile
+		And User enters phone "<phone>" on the mobile
+		And User enters email "<email>" on the mobile
+		And User enters username "<username>" on the mobile
+		And User enters password "<password>" on the mobile
+		And User clicks Cancel Register button on the mobile
+		Then User redirects to login page on the mobile
+		When User clicks Sign Up button on the mobile
+		And User clicks Cancel Register button on the mobile
+		Then User redirects to login page on the mobile
+		Examples:
+			| firstname | lastname | phone | email  | username | password |
+			| user      | user     | 12345 | ab@cde | user999  | user01   |
+
+	#	PRIMARY_TC01
+	Scenario Outline: View Primary Balance Page
+		When User input username '<Username>' and password '<Password>' on the mobile
+		And User submit the login form on the mobile
+		Then User should be authenticated successfully on the mobile
+		When User clicks Primary Balance View Details on the mobile
+		Then User should see Primary Balance page on the mobile
+		Examples:
+			| Username  | Password   |
+			| TEST99    | TEST99     |
 
 # mvn clean verify -Dwebdriver.driver=appium -Dcucumber.filter.tags=@mobile
