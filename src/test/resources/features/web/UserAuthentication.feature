@@ -69,7 +69,7 @@ Feature: Web User Authentication
 			| user99    | user99     |
 
   		#	PRIMARY_TC02
-	@web
+		#	put on hold
 	Scenario Outline: Sort Primary Balance table
 		When User input username '<Username>' and password '<Password>'
 		And User submit the login form
@@ -80,5 +80,12 @@ Feature: Web User Authentication
 		Examples:
 			| Username  | Password   |
 			| user99    | user99     |
+@web
+		#	LANDING_TC01
+	Scenario: Verify the display on the Landing Page
+		Then User should see sign in elements
+
+
+
 # mvn clean verify "-Dproperties=serenity.properties -Dcucumber.filter.tags=@web"
 # mvn clean verify "-Dproperties=serenity.properties -Dcucumber.filter.tags=not @mobile"

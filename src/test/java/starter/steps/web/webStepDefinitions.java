@@ -14,6 +14,7 @@ import starter.actions.web.HomeActions;
 import starter.actions.web.LoginActions;
 import starter.actions.web.RegisterActions;
 import starter.questions.HomePageQuestions;
+import starter.questions.LoginPageQuestions;
 import starter.questions.PrimaryPageQuestions;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
@@ -152,6 +153,19 @@ public class webStepDefinitions {
         );
         actor.should(
                 seeThat(PrimaryPageQuestions.isPrimaryAccountViewDetailsVisible())
+        );
+    }
+
+    @Then("{actor} should see sign in elements")
+    public void userShouldSeeSignInElements(Actor actor) {
+        actor.should(
+                seeThat(LoginPageQuestions.isCloudBankLogoVisible()),
+                seeThat(LoginPageQuestions.isSignInLablelVisible()),
+                seeThat(LoginPageQuestions.isUsernameFieldVisible()),
+                seeThat(LoginPageQuestions.isPasswordFieldVisible()),
+                seeThat(LoginPageQuestions.isRememberMeCheckboxVisible()),
+                seeThat(LoginPageQuestions.isSignInButtonVisible()),
+                seeThat(LoginPageQuestions.isSignUpButtonVisible())
         );
     }
 }
