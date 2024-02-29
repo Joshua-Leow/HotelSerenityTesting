@@ -80,12 +80,15 @@ Feature: Web User Authentication
 		Examples:
 			| Username  | Password   |
 			| user99    | user99     |
-@web
+
 		#	LANDING_TC01
 	Scenario: Verify the display on the Landing Page
 		Then User should see sign in elements
-
-
+	@web
+		#	REG_TC01
+	Scenario: Verify the display on the Sign Up Page
+		When User clicks Sign Up button
+		Then User should see sign up elements
 
 # mvn clean verify "-Dproperties=serenity.properties -Dcucumber.filter.tags=@web"
 # mvn clean verify "-Dproperties=serenity.properties -Dcucumber.filter.tags=not @mobile"

@@ -16,6 +16,7 @@ import starter.actions.web.RegisterActions;
 import starter.questions.HomePageQuestions;
 import starter.questions.LoginPageQuestions;
 import starter.questions.PrimaryPageQuestions;
+import starter.questions.RegistrationPageQuestions;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 
@@ -166,6 +167,21 @@ public class webStepDefinitions {
                 seeThat(LoginPageQuestions.isRememberMeCheckboxVisible()),
                 seeThat(LoginPageQuestions.isSignInButtonVisible()),
                 seeThat(LoginPageQuestions.isSignUpButtonVisible())
+        );
+    }
+
+    @Then("{actor} should see sign up elements")
+    public void userShouldSeeSignUpElements(Actor actor) {
+        actor.should(
+                seeThat(RegistrationPageQuestions.isFirstNameFieldVisible()),
+                seeThat(RegistrationPageQuestions.isLastNameFieldVisible()),
+                seeThat(RegistrationPageQuestions.isPhoneFieldVisible()),
+                seeThat(RegistrationPageQuestions.isEmailFieldVisible()),
+                seeThat(RegistrationPageQuestions.isUsernameFieldVisible()),
+                seeThat(RegistrationPageQuestions.isPasswordFieldVisible()),
+                seeThat(RegistrationPageQuestions.isShowPasswordCheckboxVisible()),
+                seeThat(RegistrationPageQuestions.isSignUpButtonVisible()),
+                seeThat(RegistrationPageQuestions.isCancelButtonVisible())
         );
     }
 }
