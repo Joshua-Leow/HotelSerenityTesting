@@ -10,6 +10,7 @@ import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.questions.page.TheWebPage;
+import org.hamcrest.Matchers;
 import starter.actions.web.HomeActions;
 import starter.actions.web.LoginActions;
 import starter.actions.web.RegisterActions;
@@ -182,6 +183,31 @@ public class webStepDefinitions {
                 seeThat(RegistrationPageQuestions.isShowPasswordCheckboxVisible()),
                 seeThat(RegistrationPageQuestions.isSignUpButtonVisible()),
                 seeThat(RegistrationPageQuestions.isCancelButtonVisible())
+        );
+    }
+
+    @Then("{actor} registration should be unsuccessful")
+    public void userRegistrationShouldBeUnsuccessful(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(TheWebPage.currentUrl()).doesNotContain("index")
+        );
+        actor.should(
+                seeThat(RegistrationPageQuestions.isEmailExistMessageVisible(), Matchers.equalTo(false)),
+                seeThat(RegistrationPageQuestions.isUsernameExistMessageVisible(), Matchers.equalTo(false))
+        );
+    }
+
+    @And("{actor} clicks show password")
+    public void userClicksShowPassword(Actor actor) {
+        actor.attemptsTo(
+                RegisterActions.clickShowPassword()
+        );
+    }
+
+    @Then("{actor} should see password not masked")
+    public void userShouldSeePasswordNotMasked(Actor actor) {
+        actor.should(
+                seeThat(RegistrationPageQuestions.isPasswordMasked(), Matchers.equalTo(false))
         );
     }
 }

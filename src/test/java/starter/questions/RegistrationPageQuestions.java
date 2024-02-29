@@ -42,4 +42,18 @@ public class RegistrationPageQuestions {
                 .answeredBy(actor);
     }
 
+    public static Question<Boolean> isEmailExistMessageVisible() {
+        return actor -> Visibility.of(RegistrationPage.EMAILEXIST_MESSAGE)
+                .answeredBy(actor);
+    }
+
+    public static Question<Boolean> isUsernameExistMessageVisible() {
+        return actor -> Visibility.of(RegistrationPage.USERNAMEEXIST_MESSAGE)
+                .answeredBy(actor);
+    }
+
+    public static Question<Boolean> isPasswordMasked() {
+        return actor -> Visibility.of(RegistrationPage.PASSWORDMASKED_FIELD)
+                .answeredBy(actor);
+    }
 }

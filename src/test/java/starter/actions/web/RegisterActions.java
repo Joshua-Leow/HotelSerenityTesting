@@ -59,4 +59,10 @@ public class RegisterActions {
                 Click.on(RegistrationPage.CANCEL_BUTTON)
         );
     }
+
+    public static Performable clickShowPassword() {
+        return Task.where("{0} clicks show password",
+                Click.on(RegistrationPage.SHOWPASSWORD_CHECKBOX)
+        );
+    }
 }

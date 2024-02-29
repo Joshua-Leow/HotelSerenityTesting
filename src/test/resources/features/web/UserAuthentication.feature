@@ -84,11 +84,35 @@ Feature: Web User Authentication
 		#	LANDING_TC01
 	Scenario: Verify the display on the Landing Page
 		Then User should see sign in elements
-	@web
+
 		#	REG_TC01
 	Scenario: Verify the display on the Sign Up Page
 		When User clicks Sign Up button
 		Then User should see sign up elements
+
+			#	REG_TC03
+	Scenario Outline: Validation on sign up page
+		When User clicks Sign Up button
+		And User enters first name "<firstname>"
+		And User enters last name "<lastname>"
+		And User enters phone "<phone>"
+		And User enters email "<email>"
+		And User enters username "<username>"
+		And User enters password "<password>"
+		And User clicks Sign Up Register button
+		Then User registration should be unsuccessful
+		Examples:
+			| firstname | lastname  | phone     | email     | username  | password  |
+			| !@#$%^&*( | !@#$%^&*( | !@#$%^&*( | !@#$%^&*( | !@#$%^&*( | !@#$%^&*( |
+			| 123456789 | 123456789 | 123456789 | 123456789 | 123456789 | 123456789 |
+			| qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio |
+	@web
+		#	REG_TC04
+	Scenario: Show password
+		When User clicks Sign Up button
+		And User enters password "qwerty"
+		And User clicks show password
+		Then User should see password not masked
 
 # mvn clean verify "-Dproperties=serenity.properties -Dcucumber.filter.tags=@web"
 # mvn clean verify "-Dproperties=serenity.properties -Dcucumber.filter.tags=not @mobile"
