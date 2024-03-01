@@ -1,4 +1,4 @@
-@api
+
 Feature: API User Authentication
 	As a registered user, I want to authenticate successfully so that I can access my account and perform actions within the system.
 
@@ -29,5 +29,23 @@ Feature: API User Authentication
 			| user01    | user01     | 1000     | Primary   |
 			| user01    | user01     | 1000     | Savings   |
 
+#	REG_TC03
+	@api
+	Scenario Outline: Validation on sign up page
+		Given User is on Sign Up page
+		When User enters the following:
+			| first_name   | <firstname>|
+			| last_name    | <lastname> |
+			| phone        | <phone>    |
+			| email        | <email>    |
+			| username     | <username> |
+			| password     | <password> |
+		Then User should see some error
+
+		Examples:
+			| firstname | lastname  | phone     | email     | username  | password  |
+			| !@#$%^&*( | !@#$%^&*( | !@#$%^&*( | !@#$%^&*( | !@#$%^&*( | !@#$%^&*( |
+			| 123456789 | 123456789 | 123456789 | 123456789 | 123456789 | 123456789 |
+			| qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio |
 # mvn clean verify "-Dproperties=serenity.properties -Dcucumber.filter.tags=@api"
 # mvn clean verify "-Dproperties=serenity.properties -Dcucumber.filter.tags=not @mobile"

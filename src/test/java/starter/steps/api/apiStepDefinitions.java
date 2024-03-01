@@ -12,8 +12,10 @@ import net.serenitybdd.rest.SerenityRest;
 import net.serenitybdd.screenplay.Actor;
 import starter.pages.API.DepositPage;
 import starter.pages.API.LoginPage;
+import starter.pages.API.SignUpPage;
 
 import java.util.Arrays;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -127,6 +129,61 @@ public class apiStepDefinitions {
         SerenityRest.lastResponse().then().statusCode(200);
 
         // another method without using 'remember', 'recall' feature
+        JsonPath responseBody = SerenityRest.lastResponse().jsonPath();
+        String actualStatus = responseBody.getString("status");
+        System.out.println("=======================actualStatus: " + actualStatus);
+
+        assertThat(actualStatus).as("Status is correct").isEqualTo(expectedStatus);
+    }
+
+    @Given("User is on Sign Up page")
+    public void userIsOnSignUpPage() {
+        // No action needed as the base path is already set for API testing
+    }
+
+    @When("User enters the following:")
+    public void userEntersTheFollowing(Map<String, String> userData) {
+        System.out.println("======================userData for API request:======================");
+        System.out.println("======================userData: " + userData);
+
+        // Extract user data from the map
+        String username = userData.get("username");
+        String password = userData.get("password");
+        String firstName = userData.get("first_name");
+        String lastName = userData.get("last_name");
+        String email = userData.get("email");
+        String phone = userData.get("phone");
+
+        // Print input data
+        System.out.println("======================Input data for API request:======================");
+        System.out.println("======================Username: " + username);
+        System.out.println("======================Password: " + password);
+        System.out.println("======================First Name: " + firstName);
+        System.out.println("======================Last Name: " + lastName);
+        System.out.println("======================Email: " + email);
+        System.out.println("======================Phone: " + phone);
+
+        // Create SignUpPage object with extracted user data
+        SignUpPage payload = new SignUpPage(username, password, firstName, lastName, email, phone);
+
+        // Send API request with payload
+        Response response = SerenityRest.given()
+                .baseUri(getCurrentEndpoint())
+                .basePath("/signup")
+                .body(payload, ObjectMapperType.GSON)
+                .accept(ContentType.JSON)
+                .contentType(ContentType.JSON)
+                .post();
+
+        // Add assertions or further actions based on API response
+    }
+
+    @Then("User should see some error")
+    public void userShouldSeeSomeError() {
+        String expectedStatus = "failed";
+
+        SerenityRest.lastResponse().then().statusCode(400);
+
         JsonPath responseBody = SerenityRest.lastResponse().jsonPath();
         String actualStatus = responseBody.getString("status");
         System.out.println("=======================actualStatus: " + actualStatus);
