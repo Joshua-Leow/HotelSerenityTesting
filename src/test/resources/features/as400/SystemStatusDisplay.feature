@@ -5,7 +5,18 @@ Feature: System Status Display on AS400 Terminal
 	Background:
 		Given User is connected to the AS400 terminal
 
-	Scenario Outline: Viewing AS400 System Status
+	Scenario Outline: Viewing AS400 System Status 1
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'General system tasks'
+		And User select the 'Status' option
+		And User choose the 'Display system status' option
+		Then User should see the text 'Display System Status' on the screen
+
+		Examples:
+			| Username | Password |
+			| RRHADI   | K$$ja01  |
+
+	Scenario Outline: Viewing AS400 System Status 2
 		When User log in with username '<Username>' and password '<Password>'
 		And User navigate to 'General system tasks'
 		And User select the 'Status' option
