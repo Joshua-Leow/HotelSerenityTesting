@@ -132,7 +132,7 @@ public class mobileStepDefinitions {
         );
     }
 
-    @Then("{actor} should see Primary Balance page on the  mobile")
+    @Then("{actor} should see Primary Balance page on the mobile")
     public void userShouldSeePrimaryBalancePageOnTheMobile(Actor actor) {
         actor.attemptsTo(
                 Ensure.that(TheWebPage.currentUrl()).containsIgnoringCase("account/primaryAccount")
