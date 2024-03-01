@@ -7,7 +7,9 @@ Feature: PDF Testing
 		Then User sees PDF file similarity should be above 90%
 
 		Examples:
-			| PDF_1  								| PDF_2   									|
-			| C:\Users\rolan\Downloads\Invoice.pdf 	| C:\Users\rolan\Downloads\Invoice.pdf    	|
+			| PDF_1  							         	| PDF_2   				         					|
+			| C:\Users\joshua.leow\Downloads\Invoice.pdf 	| C:\Users\joshua.leow\Downloads\Invoice.pdf    	|
+			| C:\Users\joshua.leow\Downloads\Invoice.pdf 	| C:\Users\joshua.leow\Downloads\Invoice2.pdf    	|
+
 
 # mvn clean verify "-Dproperties=serenity.properties -Dcucumber.filter.tags=@pdf"

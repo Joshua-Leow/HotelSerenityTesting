@@ -19,6 +19,7 @@ import java.util.Set;
 
 import static io.restassured.RestAssured.given;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class pdfStepDefinitions {
 
@@ -50,9 +51,13 @@ public class pdfStepDefinitions {
         boolean above90Percent = similarity > 0.9; // 90%
         if (above90Percent) {
             System.out.println("Above 90% PASSED");
+            System.out.println("similarity = " + similarity);
+            assertThat(true).isTrue();
         }
         else {
             System.out.println("Above 90% FAILED");
+            System.out.println("similarity = " + similarity);
+            assertThat(false).isTrue();
         }
     }
 
