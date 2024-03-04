@@ -5,23 +5,13 @@ Feature: System Status Display on AS400 Terminal
 	Background:
 		Given User is connected to the AS400 terminal
 
-	Scenario Outline: Viewing AS400 System Status 1
+	Scenario Outline: Viewing AS400 System Status
 		When User log in with username '<Username>' and password '<Password>'
 		And User navigate to 'General system tasks'
 		And User select the 'Status' option
 		And User choose the 'Display system status' option
 		Then User should see the text 'Display System Status' on the screen
 
-		Examples:
-			| Username | Password |
-			| RRHADI   | K$$ja01  |
-
-	Scenario Outline: Viewing AS400 System Status 2
-		When User log in with username '<Username>' and password '<Password>'
-		And User navigate to 'General system tasks'
-		And User select the 'Status' option
-		And User choose the 'Display system status' option
-		Then User should see the text 'Display System Status' on the screen
 		Examples:
 			| Username | Password |
 			| RRHADI   | K$$ja01  |
@@ -42,7 +32,49 @@ Feature: System Status Display on AS400 Terminal
 		Examples:
 			| Username | Password |
 			| TEST     | TEST123  |
-	@as400
+
+#		TC03
+	Scenario Outline: View User Task
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		Then User should see the following options on the screen:
+			| 1. Display or Change your Job     |
+			| 2. Display Messages               |
+			| 3. Send a Message                 |
+			| 4. Submit a Job                   |
+			| 5. Programming                    |
+			| 6. Communications                 |
+			| 7. Define or Change the System    |
+			| 8. Problem Handling               |
+			| 9. Display a Menu                 |
+			| 10. Information Assistant Options |
+			| 11. IBM i Access tasks            |
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+
+
+   #		TC04
+	Scenario Outline: Verify the display on "Display or Change your Job" under User
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'Display or Change your Job'
+		Then User should see the following options on the screen:
+			| 1. Display job status attributes                         |
+			| 2. Display job definition attributes                     |
+			| 3. Display job run attributes, if active                 |
+			| 4. Work with spooled files                               |
+			| 10. Display job log, if active, on job queue, or pending |
+			| 11. Display call stack, if active                        |
+			| 12. Work with locks, if active                           |
+			| 13. Display library list, if active                      |
+			| 14. Display open files, if active                        |
+			| 15. Display file overrides, if active                    |
+			| 16. Display commitment control status, if active        |
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+
 #		TC05
 	Scenario Outline: Verify display of job status attributes
 		When User log in with username '<Username>' and password '<Password>'
@@ -70,4 +102,32 @@ Feature: System Status Display on AS400 Terminal
 			| Program return code . . . . . . . . . . . . :                |
 		Examples:
 			| Username | Password |
-			| RHADI     | K$$ja01  |
+			| RHADI    | K$$ja01  |
+	@as400
+      #		TC06
+	Scenario Outline: Verify the display on "Display job definition attributes" under the Display or Change your Job on User Task
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'Display or Change your Job'
+		And User navigate to 'Display job definition attributes'
+		Then User should see the following options on the screen:
+			| System:   PUB400                                    |
+			| Job:                                                |
+			| User:                                               |
+			| Number:                                             |
+			| Job description . . . . . . . . . . . . . . . . . : |
+			| Library . . . . . . . . . . . . . . . . . . . . :   |
+			| ASP device  . . . . . . . . . . . . . . . . . . :   |
+			| Job queue . . . . . . . . . . . . . . . . . . . . : |
+			| Job priority (on job queue) . . . . . . . . . . . : |
+			| Output priority (on output queue) . . . . . . . . : |
+			| End severity  . . . . . . . . . . . . . . . . . . : |
+			| Message logging:                                    |
+			| Level . . . . . . . . . . . . . . . . . . . . . :   |
+			| Severity  . . . . . . . . . . . . . . . . . . . :   |
+			| Text  . . . . . . . . . . . . . . . . . . . . . :   |
+			| Log CL program commands . . . . . . . . . . . . . : |
+			| Program return code . . . . . . . . . . . . :       |
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
