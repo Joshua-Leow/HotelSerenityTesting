@@ -47,5 +47,12 @@ Feature: API User Authentication
 			| !@#$%^&*( | !@#$%^&*( | !@#$%^&*( | !@#$%^&*( | !@#$%^&*( | !@#$%^&*( |
 			| 123456789 | 123456789 | 123456789 | 123456789 | 123456789 | 123456789 |
 			| qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio |
+
+	#	REG_TC07
+	Scenario: Access Sign up page
+		Given User is on Sign Up page
+		Then User should see no errors
+
+
 # mvn clean verify "-Dproperties=serenity.properties -Dcucumber.filter.tags=@api"
 # mvn clean verify "-Dproperties=serenity.properties -Dcucumber.filter.tags=not @mobile"

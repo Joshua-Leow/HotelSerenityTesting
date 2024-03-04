@@ -190,4 +190,9 @@ public class apiStepDefinitions {
 
         assertThat(actualStatus).as("Status is correct").isEqualTo(expectedStatus);
     }
+
+    @Then("{actor} should see no errors")
+    public void userShouldSeeNoErrors() {
+        SerenityRest.lastResponse().then().statusCode(200);
+    }
 }
