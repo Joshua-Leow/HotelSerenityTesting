@@ -103,7 +103,7 @@ Feature: System Status Display on AS400 Terminal
 		Examples:
 			| Username | Password |
 			| RHADI    | K$$ja01  |
-	@as400
+
       #		TC06
 	Scenario Outline: Verify the display on "Display job definition attributes" under the Display or Change your Job on User Task
 		When User log in with username '<Username>' and password '<Password>'
@@ -128,6 +128,93 @@ Feature: System Status Display on AS400 Terminal
 			| Text  . . . . . . . . . . . . . . . . . . . . . :   |
 			| Log CL program commands . . . . . . . . . . . . . : |
 			| Program return code . . . . . . . . . . . . :       |
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+
+      #		TC07
+	Scenario Outline: Verify the display on "Work with spooled files" under the Display or Change your Job on User Task
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'Display or Change your Job'
+		And User navigate to 'Display job run attributes, if active'
+		Then User should see the following options on the screen:
+			| System:   PUB400                                    |
+			| Job:                                                |
+			| User:                                               |
+			| Number:                                             |
+			| Run priority  . . . . . . . . . . . . . . . . . . : |
+			| Time slice in milliseconds  . . . . . . . . . . . : |
+			| Eligible for purge  . . . . . . . . . . . . . . . : |
+			| Default wait time in seconds  . . . . . . . . . . : |
+			| Maximum CPU time in milliseconds  . . . . . . . . : |
+			| CPU time used . . . . . . . . . . . . . . . . . :   |
+			| Maximum temporary storage in megabytes  . . . . . : |
+			| Temporary storage used  . . . . . . . . . . . . :   |
+			| Peak temporary storage used . . . . . . . . . . :   |
+			| Maximum threads . . . . . . . . . . . . . . . . . : |
+			| Threads . . . . . . . . . . . . . . . . . . . . :   |
+			| Thread resources affinity:                          |
+			| Group . . . . . . . . . . . . . . . . . . . . . :   |
+			| Level . . . . . . . . . . . . . . . . . . . . . :   |
+			| Resources affinity group  . . . . . . . . . . . . : |
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+	@as400
+      #		TC08
+	Scenario Outline: Verify the display on "Display job run attributes, if active" under the Display or Change your Job on User Task
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'Display or Change your Job'
+		And User navigate to 'Work with spooled files'
+		Then User should see the following options on the screen:
+			| Device or    |
+			| Total        |
+			| Current      |
+			| Opt  File    |
+			| Queue        |
+			| User Data    |
+			| Status       |
+			| Pages        |
+			| Page         |
+			| Copies       |
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+
+	#		TC09
+	Scenario Outline: Verify the display on "Display job log; if active, on job queue, or pending" under the Display or Change your Job on User Task
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'Display or Change your Job'
+		And User navigate to 'Display job log, if active, on job queue, or pending'
+		Then User should see the following options on the screen:
+			| System:   PUB400 |
+			| Job:             |
+			| User:            |
+			| Number:          |
+			| >> /*      */    |
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+
+  	#		TC10
+	Scenario Outline: Verify the display on "Work with spooled files" under the Display or Change your Job on User Task
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'Display or Change your Job'
+		And User navigate to 'Display call stack, if active'
+		Then User should see the following options on the screen:
+			| System:   PUB400 |
+			| Job:             |
+			| User:            |
+			| Number:          |
+			| Thread:          |
+			| Type             |
+			| Program          |
+			| Statement        |
+			| Procedure        |
 		Examples:
 			| Username | Password |
 			| RHADI    | K$$ja01  |
