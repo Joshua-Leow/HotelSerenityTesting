@@ -15,7 +15,7 @@ Feature: System Status Display on AS400 Terminal
 		Examples:
 			| Username | Password |
 			| RRHADI   | K$$ja01  |
-
+	@as400
 #		TC01
 	Scenario Outline: Login successfully to AS400
 		When User log in with username '<Username>' and password '<Password>'
@@ -161,7 +161,7 @@ Feature: System Status Display on AS400 Terminal
 		Examples:
 			| Username | Password |
 			| RHADI    | K$$ja01  |
-	@as400
+
       #		TC08
 	Scenario Outline: Verify the display on "Display job run attributes, if active" under the Display or Change your Job on User Task
 		When User log in with username '<Username>' and password '<Password>'
@@ -191,9 +191,9 @@ Feature: System Status Display on AS400 Terminal
 		And User navigate to 'Display job log, if active, on job queue, or pending'
 		Then User should see the following options on the screen:
 			| System:   PUB400 |
-			| Job:             |
-			| User:            |
-			| Number:          |
+			| Job . . :        |
+			| User . . :       |
+			| Number . . . :   |
 			| >> /*      */    |
 		Examples:
 			| Username | Password |
