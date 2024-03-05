@@ -1,4 +1,4 @@
-@web
+
 Feature: Web User Authentication
 	As a registered user, I want to authenticate successfully so that I can access my account and perform actions within the system.
 
@@ -116,6 +116,11 @@ Feature: Web User Authentication
 		And User clicks show password
 		Then User should see password not masked
 	@web
+		#	REG_TC07
+	Scenario: Access Sign up page
+		When User clicks Sign Up button
+		Then User redirects to Sign up page
+
 		# 	REG_TC08
 	Scenario Outline: Register Existing User
 		When User clicks Sign Up button

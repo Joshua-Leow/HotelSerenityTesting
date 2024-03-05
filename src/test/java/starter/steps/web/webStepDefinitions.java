@@ -135,6 +135,13 @@ public class webStepDefinitions {
         );
     }
 
+    @Then("{actor} redirects to Sign up page")
+    public void userRedirectsToSignUpPage(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(TheWebPage.currentUrl()).containsIgnoringCase("signup")
+        );
+    }
+
     @And("{actor} clicks Cancel Register button")
     public void userClicksCancelRegisterButton(Actor actor) {
         actor.attemptsTo(
