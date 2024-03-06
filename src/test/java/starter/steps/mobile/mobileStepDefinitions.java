@@ -16,6 +16,7 @@ import starter.actions.web.RegisterActions;
 import starter.questions.HomePageQuestions;
 import starter.questions.LoginPageQuestions;
 import starter.questions.PrimaryPageQuestions;
+import starter.questions.RegistrationPageQuestions;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -156,4 +157,18 @@ public class mobileStepDefinitions {
         );
     }
 
+    @Then("{actor} should see sign up elements on the mobile")
+    public void userShouldSeeSignUpElementsOnTheMobile(Actor actor) {
+        actor.should(
+                seeThat(RegistrationPageQuestions.isFirstNameFieldVisible()),
+                seeThat(RegistrationPageQuestions.isLastNameFieldVisible()),
+                seeThat(RegistrationPageQuestions.isPhoneFieldVisible()),
+                seeThat(RegistrationPageQuestions.isEmailFieldVisible()),
+                seeThat(RegistrationPageQuestions.isUsernameFieldVisible()),
+                seeThat(RegistrationPageQuestions.isPasswordFieldVisible()),
+                seeThat(RegistrationPageQuestions.isShowPasswordCheckboxVisible()),
+                seeThat(RegistrationPageQuestions.isSignUpButtonVisible()),
+                seeThat(RegistrationPageQuestions.isCancelButtonVisible())
+        );
+    }
 }

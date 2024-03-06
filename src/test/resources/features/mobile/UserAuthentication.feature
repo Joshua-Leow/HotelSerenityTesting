@@ -4,10 +4,15 @@ Feature: Mobile User Authentication
 
 	Background:
 		Given User is on the mobile login page
-	@mobile
+
 #	LANDING_TC01
 	Scenario: Verify the display on the Landing Page
 		Then User should see sign in elements on the mobile
+	@mobile
+ #	REG_TC01
+	Scenario: Verify the display on the Sign Up Page
+		When User clicks Sign Up button on the mobile
+		Then User should see sign up elements on the mobile
 
 #	REG_TC02
 	Scenario Outline: Successful User Registration
