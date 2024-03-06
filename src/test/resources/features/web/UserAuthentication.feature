@@ -71,7 +71,7 @@ Feature: Web User Authentication
 			| user99    | user99     |
 
   		#	PRIMARY_TC02
-		#	put on hold
+		#	put on hold, complex test case to sort
 	Scenario Outline: Sort Primary Balance table
 		When User input username '<Username>' and password '<Password>'
 		And User submit the login form

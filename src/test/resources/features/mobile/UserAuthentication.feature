@@ -1,9 +1,13 @@
-@mobile
+
 Feature: Mobile User Authentication
 	As a registered user, I want to authenticate successfully so that I can access my account and perform actions within the system.
 
 	Background:
 		Given User is on the mobile login page
+	@mobile
+#	LANDING_TC01
+	Scenario: Verify the display on the Landing Page
+		Then User should see sign in elements on the mobile
 
 #	REG_TC02
 	Scenario Outline: Successful User Registration

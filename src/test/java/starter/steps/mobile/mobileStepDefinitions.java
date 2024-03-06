@@ -14,6 +14,7 @@ import starter.actions.web.HomeActions;
 import starter.actions.web.LoginActions;
 import starter.actions.web.RegisterActions;
 import starter.questions.HomePageQuestions;
+import starter.questions.LoginPageQuestions;
 import starter.questions.PrimaryPageQuestions;
 
 import java.net.MalformedURLException;
@@ -141,4 +142,18 @@ public class mobileStepDefinitions {
                 seeThat(PrimaryPageQuestions.isPrimaryAccountViewDetailsVisible())
         );
     }
+
+    @Then("{actor} should see sign in elements on the mobile")
+    public void userShouldSeeSignInElementsOnTheMobile(Actor actor) {
+        actor.should(
+                seeThat(LoginPageQuestions.isCloudBankLogoVisible()),
+                seeThat(LoginPageQuestions.isSignInLablelVisible()),
+                seeThat(LoginPageQuestions.isUsernameFieldVisible()),
+                seeThat(LoginPageQuestions.isPasswordFieldVisible()),
+                seeThat(LoginPageQuestions.isRememberMeCheckboxVisible()),
+                seeThat(LoginPageQuestions.isSignInButtonVisible()),
+                seeThat(LoginPageQuestions.isSignUpButtonVisible())
+        );
+    }
+
 }
