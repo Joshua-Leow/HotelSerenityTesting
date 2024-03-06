@@ -224,6 +224,5 @@ public class webStepDefinitions {
         actor.should(
                 seeThat(RegistrationPageQuestions.isEmailOrUsernameExistMessageVisible())
         );
-
     }
 }

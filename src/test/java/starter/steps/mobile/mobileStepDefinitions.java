@@ -107,6 +107,20 @@ public class mobileStepDefinitions {
         );
     }
 
+    @And("{actor} clicks show password on the mobile")
+    public void userClicksShowPasswordOnTheMobile(Actor actor) {
+        actor.attemptsTo(
+                RegisterActions.clickShowPassword()
+        );
+    }
+
+    @Then("{actor} should see password not masked on the mobile")
+    public void userShouldSeePasswordNotMaskedOnTheMobile(Actor actor) {
+        actor.should(
+                seeThat(RegistrationPageQuestions.isPasswordMasked(), Matchers.equalTo(false))
+        );
+    }
+
     @And("{actor} clicks Sign Up Register button on the mobile")
     public void userClicksSignUpRegisterButtonOnTheMobile(Actor actor) {
         actor.attemptsTo(
@@ -181,6 +195,20 @@ public class mobileStepDefinitions {
         actor.should(
                 seeThat(RegistrationPageQuestions.isEmailExistMessageVisible(), Matchers.equalTo(false)),
                 seeThat(RegistrationPageQuestions.isUsernameExistMessageVisible(), Matchers.equalTo(false))
+        );
+    }
+
+    @Then("{actor} redirects to Sign up page on the mobile")
+    public void userRedirectsToSignUpPageOnTheMobile(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(TheWebPage.currentUrl()).containsIgnoringCase("signup")
+        );
+    }
+
+    @Then("{actor} should see existing error message on the mobile")
+    public void userShouldSeeExistingErrorMessageOnTheMobile(Actor actor) {
+        actor.should(
+                seeThat(RegistrationPageQuestions.isEmailOrUsernameExistMessageVisible())
         );
     }
 }

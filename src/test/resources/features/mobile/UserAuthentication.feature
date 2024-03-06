@@ -30,7 +30,7 @@ Feature: Mobile User Authentication
 			| user      | user     | 12345 | az@jkk | user98   | user99   |
 		# email and username cannot exist
 
-				#	REG_TC03
+ 	#	REG_TC03
 	Scenario Outline: Validation on sign up page
 		When User clicks Sign Up button on the mobile
 		And User enters first name "<firstname>" on the mobile
@@ -47,23 +47,12 @@ Feature: Mobile User Authentication
 			| 123456789 | 123456789 | 123456789 | 123456789 | 123456789 | 123456789 |
 			| qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio |
 
-#	LOGIN_TC01
-	Scenario Outline: Successful User Authentication
-		When User input username '<Username>' and password '<Password>' on the mobile
-		And User submit the login form on the mobile
-		Then User should be authenticated successfully on the mobile
-		Examples:
-			| Username | Password |
-			| user01   | user01   |
-
-#	LOGIN_TC02
-	Scenario Outline: Login with invalid credentials
-		When User input username '<Username>' and password '<Password>' on the mobile
-		And User submit the login form on the mobile
-		Then User should see Error Message displayed "Invalid username and password" on the mobile
-		Examples:
-			| Username  | Password   |
-			| TEST99    | TEST99     |
+ 	#	REG_TC04
+	Scenario: Show password
+		When User clicks Sign Up button
+		And User enters password "qwerty" on the mobile
+		And User clicks show password on the mobile
+		Then User should see password not masked on the mobile
 
 	#	REG_TC06
 	Scenario Outline: Successfully Cancel User Registration
@@ -82,6 +71,47 @@ Feature: Mobile User Authentication
 		Examples:
 			| firstname | lastname | phone | email  | username | password |
 			| user      | user     | 12345 | ab@cde | user999  | user01   |
+
+	#	REG_TC07
+	Scenario: Access Sign up page
+		When User clicks Sign Up button on the mobile
+		Then User redirects to Sign up page on the mobile
+
+	# 	REG_TC08
+	Scenario Outline: Register Existing User
+		When User clicks Sign Up button on the mobile
+		And User enters first name "<firstname>" on the mobile
+		And User enters last name "<lastname>" on the mobile
+		And User enters phone "<phone>" on the mobile
+		And User enters email "<email>" on the mobile
+		And User enters username "<username>" on the mobile
+		And User enters password "<password>" on the mobile
+		And User clicks Sign Up Register button on the mobile
+		Then User should see existing error message on the mobile
+		Examples:
+			| firstname | lastname  | phone     | email     | username  | password  |
+			| 123456789 | 123456789 | 123456789 | 123456789 | enfeimedo | 123456789 |
+			| 123456789 | 123456789 | 123456789 | jnwreuhfe | 123456789 | 123456789 |
+			| qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio |
+			| asdfghjkl | asdfghjkl | asdfghjkl | asdfghjkl | asdfghjkl | asdfghjkl |
+
+		#	LOGIN_TC01
+	Scenario Outline: Successful User Authentication
+		When User input username '<Username>' and password '<Password>' on the mobile
+		And User submit the login form on the mobile
+		Then User should be authenticated successfully on the mobile
+		Examples:
+			| Username | Password |
+			| user01   | user01   |
+
+#	LOGIN_TC02
+	Scenario Outline: Login with invalid credentials
+		When User input username '<Username>' and password '<Password>' on the mobile
+		And User submit the login form on the mobile
+		Then User should see Error Message displayed "Invalid username and password" on the mobile
+		Examples:
+			| Username  | Password   |
+			| TEST99    | TEST99     |
 
 	#	PRIMARY_TC01
 	Scenario Outline: View Primary Balance Page
