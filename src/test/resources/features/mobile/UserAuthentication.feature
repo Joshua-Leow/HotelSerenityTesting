@@ -95,7 +95,7 @@ Feature: Mobile User Authentication
 			| qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio |
 			| asdfghjkl | asdfghjkl | asdfghjkl | asdfghjkl | asdfghjkl | asdfghjkl |
 
-		#	LOGIN_TC01
+  #	LOGIN_TC01
 	Scenario Outline: Successful User Authentication
 		When User input username '<Username>' and password '<Password>' on the mobile
 		And User submit the login form on the mobile

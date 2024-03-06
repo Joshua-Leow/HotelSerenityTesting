@@ -5,25 +5,9 @@ Feature: Web User Authentication
 	Background:
 		Given User is on the login page
 
-#	LOGIN_TC01
-	Scenario Outline: Successful User Authentication
-		When User input username '<Username>' and password '<Password>'
-		And User submit the login form
-		Then User should be authenticated successfully
-		Then User should be able to see the record '<Username>' in the Users table in the database
-
-		Examples:
-			| Username  | Password   |
-			| user01    | user01     |
-
-#	LOGIN_TC02
-	Scenario Outline: Login with invalid credentials
-		When User input username '<Username>' and password '<Password>'
-		And User submit the login form
-		Then User should see Error Message displayed "Invalid username and password"
-		Examples:
-			| Username  | Password   |
-			| TEST99    | TEST99     |
+  #	LANDING_TC01
+	Scenario: Verify the display on the Landing Page
+		Then User should see sign in elements
 
 #	REG_TC02
 	Scenario Outline: Successful User Registration
@@ -41,58 +25,12 @@ Feature: Web User Authentication
 			| user      | user     | 12345 | ab@cde | user999  | user01   |
 		# email and username cannot exist
 
-#	REG_TC06
-	Scenario Outline: Successfully Cancel User Registration
-		When User clicks Sign Up button
-		And User enters first name "<firstname>"
-		And User enters last name "<lastname>"
-		And User enters phone "<phone>"
-		And User enters email "<email>"
-		And User enters username "<username>"
-		And User enters password "<password>"
-		And User clicks Cancel Register button
-		Then User redirects to login page
-		When User clicks Sign Up button
-		And User clicks Cancel Register button
-		Then User redirects to login page
-		Examples:
-			| firstname | lastname | phone | email  | username | password |
-			| user      | user     | 12345 | ab@cde | user999  | user01   |
-
-		#	PRIMARY_TC01
-	Scenario Outline: View Primary Balance Page
-		When User input username '<Username>' and password '<Password>'
-		And User submit the login form
-		Then User should be authenticated successfully
-		When User clicks Primary Balance View Details
-		Then User should see Primary Balance page
-		Examples:
-			| Username  | Password   |
-			| user99    | user99     |
-
-  		#	PRIMARY_TC02
-		#	put on hold, complex test case to sort
-	Scenario Outline: Sort Primary Balance table
-		When User input username '<Username>' and password '<Password>'
-		And User submit the login form
-		Then User should be authenticated successfully
-		When User clicks Primary Balance View Details
-		Then User should see Primary Balance page
-		#add steps to sort
-		Examples:
-			| Username  | Password   |
-			| user99    | user99     |
-
-		#	LANDING_TC01
-	Scenario: Verify the display on the Landing Page
-		Then User should see sign in elements
-
 		#	REG_TC01
 	Scenario: Verify the display on the Sign Up Page
 		When User clicks Sign Up button
 		Then User should see sign up elements
 
-			#	REG_TC03
+   #	REG_TC03
 	Scenario Outline: Validation on sign up page
 		When User clicks Sign Up button
 		And User enters first name "<firstname>"
@@ -115,7 +53,25 @@ Feature: Web User Authentication
 		And User enters password "qwerty"
 		And User clicks show password
 		Then User should see password not masked
-	@web
+
+		#	REG_TC06
+	Scenario Outline: Successfully Cancel User Registration
+		When User clicks Sign Up button
+		And User enters first name "<firstname>"
+		And User enters last name "<lastname>"
+		And User enters phone "<phone>"
+		And User enters email "<email>"
+		And User enters username "<username>"
+		And User enters password "<password>"
+		And User clicks Cancel Register button
+		Then User redirects to login page
+		When User clicks Sign Up button
+		And User clicks Cancel Register button
+		Then User redirects to login page
+		Examples:
+			| firstname | lastname | phone | email  | username | password |
+			| user      | user     | 12345 | ab@cde | user999  | user01   |
+
 		#	REG_TC07
 	Scenario: Access Sign up page
 		When User clicks Sign Up button
@@ -138,6 +94,50 @@ Feature: Web User Authentication
 			| 123456789 | 123456789 | 123456789 | jnwreuhfe | 123456789 | 123456789 |
 			| qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio |
 			| asdfghjkl | asdfghjkl | asdfghjkl | asdfghjkl | asdfghjkl | asdfghjkl |
+
+  #	LOGIN_TC01
+	Scenario Outline: Successful User Authentication
+		When User input username '<Username>' and password '<Password>'
+		And User submit the login form
+		Then User should be authenticated successfully
+		Then User should be able to see the record '<Username>' in the Users table in the database
+
+		Examples:
+			| Username  | Password   |
+			| user01    | user01     |
+
+#	LOGIN_TC02
+	Scenario Outline: Login with invalid credentials
+		When User input username '<Username>' and password '<Password>'
+		And User submit the login form
+		Then User should see Error Message displayed "Invalid username and password"
+		Examples:
+			| Username  | Password   |
+			| TEST99    | TEST99     |
+
+   #	PRIMARY_TC01
+	Scenario Outline: View Primary Balance Page
+		When User input username '<Username>' and password '<Password>'
+		And User submit the login form
+		Then User should be authenticated successfully
+		When User clicks Primary Balance View Details
+		Then User should see Primary Balance page
+		Examples:
+			| Username  | Password   |
+			| user99    | user99     |
+
+	 #	PRIMARY_TC02
+	#	put on hold, complex test case to sort
+	Scenario Outline: Sort Primary Balance table
+		When User input username '<Username>' and password '<Password>'
+		And User submit the login form
+		Then User should be authenticated successfully
+		When User clicks Primary Balance View Details
+		Then User should see Primary Balance page
+		#add steps to sort
+		Examples:
+			| Username  | Password   |
+			| user99    | user99     |
 
 # mvn clean verify "-Dproperties=serenity.properties -Dcucumber.filter.tags=@web"
 # mvn clean verify "-Dproperties=serenity.properties -Dcucumber.filter.tags=not @mobile"
