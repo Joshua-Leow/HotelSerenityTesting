@@ -178,7 +178,7 @@ public class apiStepDefinitions {
         // Add assertions or further actions based on API response
     }
 
-    @Then("User should see some error")
+    @Then("User should see some errors")
     public void userShouldSeeSomeError() {
         String expectedStatus = "failed";
 
@@ -192,7 +192,7 @@ public class apiStepDefinitions {
     }
 
     @Then("{actor} should see no errors")
-    public void userShouldSeeNoErrors() {
-        SerenityRest.lastResponse().then().statusCode(200);
+    public void userShouldSeeNoErrors(Actor actor) {
+        SerenityRest.lastResponse().then().statusCode(201);
     }
 }

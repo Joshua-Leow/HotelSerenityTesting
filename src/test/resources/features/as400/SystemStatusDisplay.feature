@@ -15,7 +15,7 @@ Feature: System Status Display on AS400 Terminal
 		Examples:
 			| Username | Password |
 			| RRHADI   | K$$ja01  |
-	@as400
+
 #		TC01
 	Scenario Outline: Login successfully to AS400
 		When User log in with username '<Username>' and password '<Password>'
@@ -32,7 +32,7 @@ Feature: System Status Display on AS400 Terminal
 		Examples:
 			| Username | Password |
 			| TEST     | TEST123  |
-
+	@as400
 #		TC03
 	Scenario Outline: View User Task
 		When User log in with username '<Username>' and password '<Password>'
@@ -52,7 +52,6 @@ Feature: System Status Display on AS400 Terminal
 		Examples:
 			| Username | Password |
 			| RHADI    | K$$ja01  |
-
 
    #		TC04
 	Scenario Outline: Verify the display on "Display or Change your Job" under User
@@ -127,7 +126,7 @@ Feature: System Status Display on AS400 Terminal
 			| Severity  . . . . . . . . . . . . . . . . . . . :   |
 			| Text  . . . . . . . . . . . . . . . . . . . . . :   |
 			| Log CL program commands . . . . . . . . . . . . . : |
-			| Program return code . . . . . . . . . . . . :       |
+			| Job log output  . . . . . . . . . . . . . . . . . : |
 		Examples:
 			| Username | Password |
 			| RHADI    | K$$ja01  |

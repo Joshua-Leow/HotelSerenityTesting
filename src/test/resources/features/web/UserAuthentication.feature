@@ -9,6 +9,12 @@ Feature: Web User Authentication
 	Scenario: Verify the display on the Landing Page
 		Then User should see sign in elements
 
+  #	REG_TC01
+	Scenario: Verify the display on the Sign Up Page
+		When User clicks Sign Up button
+		Then User should see sign up elements
+
+
 #	REG_TC02
 	Scenario Outline: Successful User Registration
 		When User clicks Sign Up button
@@ -24,11 +30,6 @@ Feature: Web User Authentication
 			| firstname | lastname | phone | email  | username | password |
 			| user      | user     | 12345 | ab@cde | user999  | user01   |
 		# email and username cannot exist
-
-		#	REG_TC01
-	Scenario: Verify the display on the Sign Up Page
-		When User clicks Sign Up button
-		Then User should see sign up elements
 
    #	REG_TC03
 	Scenario Outline: Validation on sign up page
@@ -53,7 +54,7 @@ Feature: Web User Authentication
 		And User enters password "qwerty"
 		And User clicks show password
 		Then User should see password not masked
-
+	@web
 		#	REG_TC06
 	Scenario Outline: Successfully Cancel User Registration
 		When User clicks Sign Up button
