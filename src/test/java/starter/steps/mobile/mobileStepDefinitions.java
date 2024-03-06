@@ -9,6 +9,7 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.questions.page.TheWebPage;
+import org.hamcrest.Matchers;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import starter.actions.web.HomeActions;
 import starter.actions.web.LoginActions;
@@ -169,6 +170,17 @@ public class mobileStepDefinitions {
                 seeThat(RegistrationPageQuestions.isShowPasswordCheckboxVisible()),
                 seeThat(RegistrationPageQuestions.isSignUpButtonVisible()),
                 seeThat(RegistrationPageQuestions.isCancelButtonVisible())
+        );
+    }
+
+    @Then("{actor} registration should be unsuccessful on the mobile")
+    public void userRegistrationShouldBeUnsuccessfulOnTheMobile(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(TheWebPage.currentUrl()).doesNotContain("index")
+        );
+        actor.should(
+                seeThat(RegistrationPageQuestions.isEmailExistMessageVisible(), Matchers.equalTo(false)),
+                seeThat(RegistrationPageQuestions.isUsernameExistMessageVisible(), Matchers.equalTo(false))
         );
     }
 }

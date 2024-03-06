@@ -30,6 +30,23 @@ Feature: Mobile User Authentication
 			| user      | user     | 12345 | az@jkk | user98   | user99   |
 		# email and username cannot exist
 
+				#	REG_TC03
+	Scenario Outline: Validation on sign up page
+		When User clicks Sign Up button on the mobile
+		And User enters first name "<firstname>" on the mobile
+		And User enters last name "<lastname>" on the mobile
+		And User enters phone "<phone>" on the mobile
+		And User enters email "<email>" on the mobile
+		And User enters username "<username>" on the mobile
+		And User enters password "<password>" on the mobile
+		And User clicks Sign Up Register button on the mobile
+		Then User registration should be unsuccessful on the mobile
+		Examples:
+			| firstname | lastname  | phone     | email     | username  | password  |
+			| !@#$%^&*( | !@#$%^&*( | !@#$%^&*( | !@#$%^&*( | !@#$%^&*( | !@#$%^&*( |
+			| 123456789 | 123456789 | 123456789 | 123456789 | 123456789 | 123456789 |
+			| qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio |
+
 #	LOGIN_TC01
 	Scenario Outline: Successful User Authentication
 		When User input username '<Username>' and password '<Password>' on the mobile
