@@ -38,17 +38,17 @@ Feature: System Status Display on AS400 Terminal
 		When User log in with username '<Username>' and password '<Password>'
 		And User navigate to 'User Task'
 		Then User should see the following options on the screen:
-			| 1. Display or Change your Job     |
-			| 2. Display Messages               |
-			| 3. Send a Message                 |
-			| 4. Submit a Job                   |
-			| 5. Programming                    |
-			| 6. Communications                 |
-			| 7. Define or Change the System    |
-			| 8. Problem Handling               |
-			| 9. Display a Menu                 |
-			| 10. Information Assistant Options |
-			| 11. IBM i Access tasks            |
+			| 1. Display or change your job          |
+			| 2. Display messages                    |
+			| 3. Send a message                      |
+			| 4. Submit a job                        |
+			| 5. Work with your spooled output files |
+			| 6. Work with your batch jobs           |
+			| 7. Display or change your library list |
+			| 8. Change your password                |
+			| 9. Change your user profile            |
+			| 60. More user task options             |
+			| 90. Sign off                           |
 		Examples:
 			| Username | Password |
 			| RHADI    | K$$ja01  |

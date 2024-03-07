@@ -4,7 +4,7 @@ Feature: Mobile User Authentication
 
 	Background:
 		Given User is on the mobile login page
-	@mobile
+
 #	LANDING_TC01
 	Scenario: Verify the display on the Landing Page
 		Then User should see sign in elements on the mobile
@@ -49,10 +49,16 @@ Feature: Mobile User Authentication
 
  	#	REG_TC04
 	Scenario: Show password
-		When User clicks Sign Up button
+		When User clicks Sign Up button on the mobile
 		And User enters password "qwerty" on the mobile
 		And User clicks show password on the mobile
 		Then User should see password not masked on the mobile
+	@mobile
+	#	REG_TC05
+	Scenario: Submit Registration without filling up the Sign Up field
+		When User clicks Sign Up button on the mobile
+		And User clicks Sign Up Register button on the mobile
+		Then User should see existing error message on the mobile
 
 	#	REG_TC06
 	Scenario Outline: Successfully Cancel User Registration
@@ -87,13 +93,19 @@ Feature: Mobile User Authentication
 		And User enters username "<username>" on the mobile
 		And User enters password "<password>" on the mobile
 		And User clicks Sign Up Register button on the mobile
+		When User clicks Sign Up button on the mobile
+		And User enters first name "<firstname>" on the mobile
+		And User enters last name "<lastname>" on the mobile
+		And User enters phone "<phone>" on the mobile
+		And User enters email "<email>" on the mobile
+		And User enters username "<username>" on the mobile
+		And User enters password "<password>" on the mobile
+		And User clicks Sign Up Register button on the mobile
 		Then User should see existing error message on the mobile
 		Examples:
-			| firstname | lastname  | phone     | email     | username  | password  |
-			| 123456789 | 123456789 | 123456789 | 123456789 | enfeimedo | 123456789 |
-			| 123456789 | 123456789 | 123456789 | jnwreuhfe | 123456789 | 123456789 |
-			| qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio |
-			| asdfghjkl | asdfghjkl | asdfghjkl | asdfghjkl | asdfghjkl | asdfghjkl |
+			| firstname | lastname  | phone     | email            | username  | password  |
+			| john      | doe       | 123456789 | johndoe@test.com | johnydoe  | password1 |
+
 
   #	LOGIN_TC01
 	Scenario Outline: Successful User Authentication

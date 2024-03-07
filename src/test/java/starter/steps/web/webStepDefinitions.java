@@ -14,6 +14,7 @@ import org.hamcrest.Matchers;
 import starter.actions.web.HomeActions;
 import starter.actions.web.LoginActions;
 import starter.actions.web.RegisterActions;
+import starter.actions.web.UTILITY_FUNCTIONS;
 import starter.questions.HomePageQuestions;
 import starter.questions.LoginPageQuestions;
 import starter.questions.PrimaryPageQuestions;
@@ -126,6 +127,7 @@ public class webStepDefinitions {
         actor.attemptsTo(
                 RegisterActions.clickSignUp()
         );
+        UTILITY_FUNCTIONS.WaitForSignInHeader.toAppear();
     }
 
     @Then("{actor} redirects to login page")
@@ -224,5 +226,10 @@ public class webStepDefinitions {
         actor.should(
                 seeThat(RegistrationPageQuestions.isEmailOrUsernameExistMessageVisible())
         );
+    }
+
+    @Then("User should see Please fill out this fill message")
+    public void userShouldSeePleaseFillOutThisFillMessage() {
+
     }
 }

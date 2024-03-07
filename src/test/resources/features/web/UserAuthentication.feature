@@ -55,6 +55,12 @@ Feature: Web User Authentication
 		And User clicks show password
 		Then User should see password not masked
 	@web
+   #	REG_TC05
+	Scenario: Submit Registration without filling up the Sign Up field
+		When User clicks Sign Up button
+		And User clicks Sign Up Register button
+		Then User should see Please fill out this fill message
+
 		#	REG_TC06
 	Scenario Outline: Successfully Cancel User Registration
 		When User clicks Sign Up button
@@ -78,8 +84,15 @@ Feature: Web User Authentication
 		When User clicks Sign Up button
 		Then User redirects to Sign up page
 
-		# 	REG_TC08
 	Scenario Outline: Register Existing User
+		When User clicks Sign Up button
+		And User enters first name "<firstname>"
+		And User enters last name "<lastname>"
+		And User enters phone "<phone>"
+		And User enters email "<email>"
+		And User enters username "<username>"
+		And User enters password "<password>"
+		And User clicks Sign Up Register button
 		When User clicks Sign Up button
 		And User enters first name "<firstname>"
 		And User enters last name "<lastname>"
@@ -90,11 +103,8 @@ Feature: Web User Authentication
 		And User clicks Sign Up Register button
 		Then User should see existing error message
 		Examples:
-			| firstname | lastname  | phone     | email     | username  | password  |
-			| 123456789 | 123456789 | 123456789 | 123456789 | enfeimedo | 123456789 |
-			| 123456789 | 123456789 | 123456789 | jnwreuhfe | 123456789 | 123456789 |
-			| qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio |
-			| asdfghjkl | asdfghjkl | asdfghjkl | asdfghjkl | asdfghjkl | asdfghjkl |
+			| firstname | lastname  | phone     | email            | username  | password  |
+			| john      | doe       | 123456789 | johndoe@test.com | johnydoe  | password1 |
 
   #	LOGIN_TC01
 	Scenario Outline: Successful User Authentication
@@ -115,6 +125,7 @@ Feature: Web User Authentication
 		Examples:
 			| Username  | Password   |
 			| TEST99    | TEST99     |
+
 
    #	PRIMARY_TC01
 	Scenario Outline: View Primary Balance Page
