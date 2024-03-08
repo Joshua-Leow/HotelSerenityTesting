@@ -54,7 +54,7 @@ Feature: Web User Authentication
 		And User enters password "qwerty"
 		And User clicks show password
 		Then User should see password not masked
-	@web
+
    #	REG_TC05
 	Scenario: Submit Registration without filling up the Sign Up field
 		When User clicks Sign Up button
@@ -125,6 +125,17 @@ Feature: Web User Authentication
 		Examples:
 			| Username  | Password   |
 			| TEST99    | TEST99     |
+	@web
+  #	LOGIN_TC03
+	Scenario Outline: Remember Me function
+		When User input username '<Username>' and password '<Password>'
+		And User checks Remember Me checkbox
+		And User submit the login form
+		And User logout
+		Then User should see '<Username>' on the username field
+		Examples:
+			| Username  | Password   |
+			| user01    | user01     |
 
 
    #	PRIMARY_TC01

@@ -40,4 +40,9 @@ public class LoginActions {
         );
     }
 
+    public static Performable clickRememberMe() {
+        return Task.where("{0} clicks Remember Me checkbox",
+                Click.on(LoginPage.REMEMBER_ME_CHECKBOX)
+        );
+    }
 }

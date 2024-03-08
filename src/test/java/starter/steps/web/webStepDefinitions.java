@@ -15,6 +15,7 @@ import starter.actions.web.HomeActions;
 import starter.actions.web.LoginActions;
 import starter.actions.web.RegisterActions;
 import starter.actions.web.UTILITY_FUNCTIONS;
+import starter.pages.web.LoginPage;
 import starter.questions.HomePageQuestions;
 import starter.questions.LoginPageQuestions;
 import starter.questions.PrimaryPageQuestions;
@@ -228,8 +229,29 @@ public class webStepDefinitions {
         );
     }
 
-    @Then("User should see Please fill out this fill message")
-    public void userShouldSeePleaseFillOutThisFillMessage() {
+    @Then("{actor} should see Please fill out this fill message")
+    public void userShouldSeePleaseFillOutThisFillMessage(Actor actor) {
 
+    }
+
+    @And("{actor} checks Remember Me checkbox")
+    public void userChecksRememberMeCheckbox(Actor actor) {
+        actor.attemptsTo(
+                LoginActions.clickRememberMe()
+        );
+    }
+
+    @And("{actor} logout")
+    public void userLogout(Actor actor) {
+        actor.attemptsTo(
+                HomeActions.autoLogoutFromHomePage()
+        );
+    }
+
+    @Then("{actor} should see {string} on the username field")
+    public void userShouldSeeUsernameOnTheUsernameField(Actor actor, String username) {
+        actor.attemptsTo(
+                Ensure.that(LoginPage.USERNAME_FIELD).hasText(username)
+        );
     }
 }
