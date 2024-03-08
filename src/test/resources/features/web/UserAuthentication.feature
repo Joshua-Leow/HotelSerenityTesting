@@ -4,7 +4,7 @@ Feature: Web User Authentication
 
 	Background:
 		Given User is on the login page
-	@web
+
 #	Roland's database check
 	Scenario Outline: Successful User Authentication
 		When User input username '<Username>' and password '<Password>'
@@ -158,21 +158,8 @@ Feature: Web User Authentication
 		Examples:
 			| Username  | Password   |
 			| user69    | user69     |
-
-
-  #	WEB_DASHBOARD_TC02
-		# in progress
-	Scenario Outline: View Primary Balance
-		When User input username '<Username>' and password '<Password>'
-		And User submit the login form
-		Then User should be authenticated successfully
-		When User clicks Primary Balance View Details
-		#Then User should see Primary Balance page elements
-		Examples:
-			| Username  | Password   |
-			| user69    | user69     |
-
-   #	PRIMARY_TC01
+	@web
+   #	WEB_DASHBOARD_TC02
 	Scenario Outline: View Primary Balance Page
 		When User input username '<Username>' and password '<Password>'
 		And User submit the login form
@@ -181,7 +168,7 @@ Feature: Web User Authentication
 		Then User should see Primary Balance page
 		Examples:
 			| Username  | Password   |
-			| user99    | user99     |
+			| user69    | user69     |
 
 	 #	PRIMARY_TC02
 	#	put on hold, complex test case to sort
