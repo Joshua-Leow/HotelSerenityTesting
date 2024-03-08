@@ -125,7 +125,7 @@ Feature: Web User Authentication
 		Examples:
 			| Username  | Password   |
 			| TEST99    | TEST99     |
-	@web
+
   #	LOGIN_TC03
 	Scenario Outline: Remember Me function
 		When User input username '<Username>' and password '<Password>'
@@ -137,6 +137,28 @@ Feature: Web User Authentication
 			| Username  | Password   |
 			| user01    | user01     |
 
+  #	WEB_DASHBOARD_TC01
+	Scenario Outline: Verify the display on the Landing Page
+		When User input username '<Username>' and password '<Password>'
+		And User submit the login form
+		Then User should be authenticated successfully
+		And User should see Dashboard page elements
+		Examples:
+			| Username  | Password   |
+			| user69    | user69     |
+
+	@web
+  #	WEB_DASHBOARD_TC02
+		# in progress
+	Scenario Outline: View Primary Balance
+		When User input username '<Username>' and password '<Password>'
+		And User submit the login form
+		Then User should be authenticated successfully
+		When User clicks Primary Balance View Details
+		#Then User should see Primary Balance page elements
+		Examples:
+			| Username  | Password   |
+			| user69    | user69     |
 
    #	PRIMARY_TC01
 	Scenario Outline: View Primary Balance Page

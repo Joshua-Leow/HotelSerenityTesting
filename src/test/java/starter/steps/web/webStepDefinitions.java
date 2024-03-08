@@ -231,7 +231,7 @@ public class webStepDefinitions {
 
     @Then("{actor} should see Please fill out this fill message")
     public void userShouldSeePleaseFillOutThisFillMessage(Actor actor) {
-
+        // pending
     }
 
     @And("{actor} checks Remember Me checkbox")
@@ -252,6 +252,24 @@ public class webStepDefinitions {
     public void userShouldSeeUsernameOnTheUsernameField(Actor actor, String username) {
         actor.attemptsTo(
                 Ensure.that(LoginPage.USERNAME_FIELD).hasText(username)
+        );
+    }
+
+    @Then("{actor} should see Dashboard page elements")
+    public void userShouldSeeDashboardPageElements(Actor actor) {
+        actor.should(
+                seeThat(HomePageQuestions.isCloudBankLogoVisible()),
+                seeThat(HomePageQuestions.isMainMenuHomeVisible()),
+                seeThat(HomePageQuestions.isMainMenuAccountsVisible()),
+                seeThat(HomePageQuestions.isMainMenuTransferVisible()),
+                seeThat(HomePageQuestions.isMainMenuAppointmentVisible()),
+                seeThat(HomePageQuestions.isMainMenuMeVisible()),
+                seeThat(HomePageQuestions.isPrimaryAccountBalanceVisible()),
+                seeThat(HomePageQuestions.isPrimaryAccountViewDetailsButtonVisible()),
+                seeThat(HomePageQuestions.isSavingsAccountBalanceVisible()),
+                seeThat(HomePageQuestions.isSavingsAccountViewDetailsButtonVisible()),
+                seeThat(HomePageQuestions.isGoToDepositButtonVisible()),
+                seeThat(HomePageQuestions.isGoToWithdrawalButtonVisible())
         );
     }
 }
