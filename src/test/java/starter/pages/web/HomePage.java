@@ -14,8 +14,8 @@ public class HomePage extends PageObject {
     public static Target MAIN_MENU_ME_BUTTON = Target.the("Main Menu Me Button").locatedBy("//a[normalize-space()='Me']");
     public static Target PRIMARY_ACCOUNT_BALANCE = Target.the("Primary Account Balance").locatedBy("/html[1]/body[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/h1[1]/span[1]");
     public static Target PRIMARY_ACCOUNT_VIEW_DETAILS_BUTTON = Target.the("Primary Account View Details Button").locatedBy("//a[@href='/account/primaryAccount' and .//div[contains(@class, 'panel-footer')]//span[contains(@class, 'pull-left') and text()='View Details']]");
-    public static Target SAVINGS_ACCOUNT_BALANCE = Target.the("Savings Account Balance").locatedBy("//h2[normalize-space()='Savings Balance:']");
-    public static Target SAVINGS_ACCOUNT_VIEW_DETAILS_BUTTON = Target.the("Savings Accounts View Details Button").locatedBy("/html[1]/body[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/h1[1]/span[1]");
+    public static Target SAVINGS_ACCOUNT_BALANCE = Target.the("Savings Account Balance").locatedBy("/html[1]/body[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/h1[1]/span[1]");
+    public static Target SAVINGS_ACCOUNT_VIEW_DETAILS_BUTTON = Target.the("Savings Accounts View Details Button").locatedBy("//a[@href='/account/savingsAccount']//div[@class='panel-footer']//span[@class='pull-left'][normalize-space()='View Details']");
     public static Target GO_TO_DEPOSIT_BUTTON = Target.the("Go To Deposit Button").locatedBy("//a[contains(@href,'/account/deposit')]//div[contains(@class,'panel-footer')]//div[contains(@class,'clearfix')]");
     public static Target GO_TO_WITHDRAWAL_BUTTON = Target.the("Go To Withdrawal Button").locatedBy("//a[contains(@href,'/account/withdraw')]//div[contains(@class,'panel-footer')]//div[contains(@class,'clearfix')]");
 }

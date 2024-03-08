@@ -158,14 +158,47 @@ Feature: Web User Authentication
 		Examples:
 			| Username  | Password   |
 			| user69    | user69     |
-	@web
+
    #	WEB_DASHBOARD_TC02
-	Scenario Outline: View Primary Balance Page
+	Scenario Outline: View Primary Balance
 		When User input username '<Username>' and password '<Password>'
 		And User submit the login form
 		Then User should be authenticated successfully
 		When User clicks Primary Balance View Details
 		Then User should see Primary Balance page
+		Examples:
+			| Username  | Password   |
+			| user69    | user69     |
+
+	 #	WEB_DASHBOARD_TC03
+	Scenario Outline: View Savings Balance
+		When User input username '<Username>' and password '<Password>'
+		And User submit the login form
+		Then User should be authenticated successfully
+		When User clicks Savings Balance View Details
+		Then User should see Savings Balance page
+		Examples:
+			| Username  | Password   |
+			| user69    | user69     |
+
+	 #	WEB_DASHBOARD_TC04
+	Scenario Outline: View Deposit
+		When User input username '<Username>' and password '<Password>'
+		And User submit the login form
+		Then User should be authenticated successfully
+		When User clicks Deposit View Details
+		Then User should see Deposit page
+		Examples:
+			| Username  | Password   |
+			| user69    | user69     |
+	@web
+	 #	WEB_DASHBOARD_TC05
+	Scenario Outline: View Withdrawal
+		When User input username '<Username>' and password '<Password>'
+		And User submit the login form
+		Then User should be authenticated successfully
+		When User clicks Withdrawal View Details
+		Then User should see Withdrawal page
 		Examples:
 			| Username  | Password   |
 			| user69    | user69     |

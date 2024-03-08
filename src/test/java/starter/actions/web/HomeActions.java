@@ -23,9 +23,23 @@ public class HomeActions {
         );
     }
 
-    public static Performable clickLogoutButton() {
-        return Task.where("{0} navigates to Primary Account View Details",
-                Click.on(HomePage.PRIMARY_ACCOUNT_VIEW_DETAILS_BUTTON)
+    public static Performable navigateToSavingsAccountViewDetails() {
+        return Task.where("{0} navigates to Savings Account View Details",
+                Click.on(HomePage.SAVINGS_ACCOUNT_VIEW_DETAILS_BUTTON)
         );
     }
+
+    public static Performable navigateToDepositViewDetails() {
+        return Task.where("{0} navigates to Savings Account View Details",
+                Click.on(HomePage.GO_TO_DEPOSIT_BUTTON)
+        );
+    }
+
+    public static Performable navigateToWithdrawalViewDetails() {
+        return Task.where("{0} navigates to Savings Account View Details",
+                Click.on(HomePage.GO_TO_WITHDRAWAL_BUTTON)
+        );
+    }
+
+
 }

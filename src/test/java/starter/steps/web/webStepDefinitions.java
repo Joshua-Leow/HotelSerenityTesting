@@ -272,4 +272,46 @@ public class webStepDefinitions {
                 seeThat(HomePageQuestions.isGoToWithdrawalButtonVisible())
         );
     }
+
+    @When("{actor} clicks Savings Balance View Details")
+    public void userClicksSavingsBalanceViewDetails(Actor actor) {
+        actor.attemptsTo(
+                HomeActions.navigateToSavingsAccountViewDetails()
+        );
+    }
+
+    @Then("{actor} should see Savings Balance page")
+    public void userShouldSeeSavingsBalancePage(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(TheWebPage.currentUrl()).containsIgnoringCase("account/savingsAccount")
+        );
+    }
+
+    @When("{actor} clicks Deposit View Details")
+    public void userClicksDepositViewDetails(Actor actor) {
+        actor.attemptsTo(
+                HomeActions.navigateToDepositViewDetails()
+        );
+    }
+
+    @Then("{actor} should see Deposit page")
+    public void userShouldSeeDepositPage(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(TheWebPage.currentUrl()).containsIgnoringCase("account/deposit")
+        );
+    }
+
+    @When("{actor} clicks Withdrawal View Details")
+    public void userClicksWithdrawalViewDetails(Actor actor) {
+        actor.attemptsTo(
+                HomeActions.navigateToWithdrawalViewDetails()
+        );
+    }
+
+    @Then("{actor} should see Withdrawal page")
+    public void userShouldSeeWithdrawalPage(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(TheWebPage.currentUrl()).containsIgnoringCase("account/withdraw")
+        );
+    }
 }
