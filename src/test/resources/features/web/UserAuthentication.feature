@@ -4,6 +4,17 @@ Feature: Web User Authentication
 
 	Background:
 		Given User is on the login page
+	@web
+#	Roland's database check
+	Scenario Outline: Successful User Authentication
+		When User input username '<Username>' and password '<Password>'
+		And User submit the login form
+		Then User should be authenticated successfully
+		Then User should be able to see the record '<Username>' in the Users table in the database
+
+		Examples:
+			| Username  | Password   |
+			| user69    | user69     |
 
   #	LANDING_TC01
 	Scenario: Verify the display on the Landing Page
@@ -84,6 +95,7 @@ Feature: Web User Authentication
 		When User clicks Sign Up button
 		Then User redirects to Sign up page
 
+		#	REG_TC08
 	Scenario Outline: Register Existing User
 		When User clicks Sign Up button
 		And User enters first name "<firstname>"
@@ -147,7 +159,7 @@ Feature: Web User Authentication
 			| Username  | Password   |
 			| user69    | user69     |
 
-	@web
+
   #	WEB_DASHBOARD_TC02
 		# in progress
 	Scenario Outline: View Primary Balance

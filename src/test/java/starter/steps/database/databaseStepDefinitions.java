@@ -5,6 +5,8 @@ import net.serenitybdd.screenplay.Actor;
 
 import java.sql.*;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 public class databaseStepDefinitions {
 
     public static boolean checkUserExists(String user_id) {
@@ -17,8 +19,7 @@ public class databaseStepDefinitions {
         String password = "root";
 
         // Query to check if a user with the given user_id exists
-        String sql = "SELECT 1 FROM user WHERE user_id = ?";
-        System.out.println(sql);
+        String sql = "SELECT 1 FROM user WHERE username = ?";
 
         try {
             // Loading the JDBC driver
@@ -34,10 +35,10 @@ public class databaseStepDefinitions {
                 // Execute the query and check if any rows are returned
                 try (ResultSet resultSet = statement.executeQuery()) {
                     if (resultSet.next()) {
-                        System.out.println("User with user_id " + user_id + " exists in the database.");
+                        System.out.println("User with username " + user_id + " exists in the database.");
                         return true; // User exists
                     } else {
-                        System.out.println("User with user_id " + user_id + " does not exist in the database.");
+                        System.out.println("User with username " + user_id + " does not exist in the database.");
                         return false; // User does not exist
                     }
                 }
@@ -55,6 +56,6 @@ public class databaseStepDefinitions {
 
     @Then("{actor} should be able to see the record {string} in the Users table in the database")
     public void userShouldBeAbleToSeeTheRecordUsernameInTheUsersTableInTheDatabase(Actor actor, String user_id) {
-        checkUserExists(user_id);
+        assertThat(checkUserExists(user_id)).isTrue();
     }
 }
