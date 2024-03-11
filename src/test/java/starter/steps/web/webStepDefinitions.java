@@ -335,4 +335,17 @@ public class webStepDefinitions {
         );
     }
 
+    @When("{actor} clicks dropdown {string} and option {string}")
+    public void userClicksDropdownDropdownAndOptionOption(Actor actor, String dropdown, String option) {
+        actor.attemptsTo(
+                HomeActions.openDropdownAndNavigateToOption(dropdown, option)
+        );
+    }
+
+    @Then("{actor} should see url {string} page")
+    public void userShouldSeeUrlUrlPage(Actor actor, String url) {
+        actor.attemptsTo(
+                Ensure.that(TheWebPage.currentUrl()).containsIgnoringCase(url)
+        );
+    }
 }

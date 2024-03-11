@@ -146,7 +146,7 @@ Feature: Web User Authentication
 			| user01    | user01     |
 
   #	WEB_DASHBOARD_TC01
-	Scenario Outline: Verify the display on the Landing Page
+	Scenario Outline: WEB_DASHBOARD_TC01_Verify the display on the Landing Page
 		And User ensures username '<Username>' and password '<Password>' account exists
 		When User input username '<Username>' and password '<Password>'
 		And User submit the login form
@@ -157,7 +157,7 @@ Feature: Web User Authentication
 			| user69    | user69     |
 
    #	WEB_DASHBOARD_TC02
-	Scenario Outline: View Primary Balance
+	Scenario Outline: WEB_DASHBOARD_TC02_View Primary Balance
 		And User ensures username '<Username>' and password '<Password>' account exists
 		When User input username '<Username>' and password '<Password>'
 		And User submit the login form
@@ -169,7 +169,7 @@ Feature: Web User Authentication
 			| user69    | user69     |
 
 	 #	WEB_DASHBOARD_TC03
-	Scenario Outline: View Savings Balance
+	Scenario Outline: WEB_DASHBOARD_TC03_View Savings Balance
 		And User ensures username '<Username>' and password '<Password>' account exists
 		When User input username '<Username>' and password '<Password>'
 		And User submit the login form
@@ -181,7 +181,7 @@ Feature: Web User Authentication
 			| user69    | user69     |
 
 	 #	WEB_DASHBOARD_TC04
-	Scenario Outline: View Deposit
+	Scenario Outline: WEB_DASHBOARD_TC04_View Deposit
 		And User ensures username '<Username>' and password '<Password>' account exists
 		When User input username '<Username>' and password '<Password>'
 		And User submit the login form
@@ -191,9 +191,9 @@ Feature: Web User Authentication
 		Examples:
 			| Username  | Password   |
 			| user69    | user69     |
-@web
+
 	 #	WEB_DASHBOARD_TC05
-	Scenario Outline: View Withdrawal
+	Scenario Outline: WEB_DASHBOARD_TC05_View Withdrawal
 		And User ensures username '<Username>' and password '<Password>' account exists
 		When User input username '<Username>' and password '<Password>'
 		And User submit the login form
@@ -203,6 +203,25 @@ Feature: Web User Authentication
 		Examples:
 			| Username  | Password   |
 			| user69    | user69     |
+	@web
+	 #	WEB_DASHBOARD_TC06
+	Scenario Outline: WEB_DASHBOARD_TC06_Main Menu navigation
+		And User ensures username '<Username>' and password '<Password>' account exists
+		When User input username '<Username>' and password '<Password>'
+		And User submit the login form
+		Then User should be authenticated successfully
+		When User clicks dropdown '<Dropdown>' and option '<Option>'
+		Then User should see url '<Url>' page
+		Examples:
+			| Username  | Password   | Dropdown    | Option                  | Url              |
+			| user69    | user69     | Accounts    | Primary                 | Primary          |
+			| user69    | user69     | Accounts    | Savings                 | Savings          |
+			| user69    | user69     | Transfer    | Between Accounts        | BetweenAccounts  |
+			| user69    | user69     | Transfer    | To Someone Else         | ToSomeoneElse    |
+			| user69    | user69     | Transfer    | Add/Edit Recipient      | Recipient        |
+			| user69    | user69     | Appointment | Schedule an Appointment | Create           |
+			| user69    | user69     | Me          | Profile                 | Profile          |
+			| user69    | user69     | Me          | Logout                  | Logout           |
 
 	 #	PRIMARY_TC02
 	#	put on hold, complex test case to sort
