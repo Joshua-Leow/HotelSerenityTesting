@@ -17,11 +17,13 @@ import starter.actions.web.LoginActions;
 import starter.actions.web.RegisterActions;
 import starter.actions.web.UTILITY_FUNCTIONS;
 import starter.pages.web.LoginPage;
+import starter.pages.web.DepositPage;
 import starter.questions.HomePageQuestions;
 import starter.questions.LoginPageQuestions;
 import starter.questions.PrimaryPageQuestions;
 import starter.questions.RegistrationPageQuestions;
 
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 import static org.hamcrest.CoreMatchers.anyOf;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static starter.steps.database.databaseStepDefinitions.checkUserExists;
@@ -346,6 +348,16 @@ public class webStepDefinitions {
     public void userShouldSeeUrlUrlPage(Actor actor, String url) {
         actor.attemptsTo(
                 Ensure.that(TheWebPage.currentUrl()).containsIgnoringCase(url)
+        );
+    }
+
+    @Then("{actor} should see Deposit page elements")
+    public void userShouldSeeDepositPageElements(Actor actor) {
+        String expectedText = "2. Please specify the amount you would like to deposit:";
+        actor.attemptsTo(
+                Ensure.that(DepositPage.ACCOUNT_TYPE_DROPDOWN).isDisplayed(),
+                Ensure.that(DepositPage.SPECIFY_AMOUNT_TEXT).hasText(expectedText),
+                Ensure.that(DepositPage.DEPOSIT_BUTTON).isDisplayed()
         );
     }
 }
