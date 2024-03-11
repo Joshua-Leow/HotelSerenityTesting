@@ -12,7 +12,7 @@ public class databaseStepDefinitions {
     public static boolean checkUserExists(String user_id) {
 
         // JDBC URL for MySQL, includes server address, port, and database name
-        String url = "jdbc:mysql://gt-tcoe-labs.site:3306/onlinebanking?useSSL=false&serverTimezone=UTC";
+        String url = "jdbc:mysql://10.19.128.30:3306/onlinebanking?useSSL=false&serverTimezone=UTC";
 
         // Database credentials
         String username = "root";
