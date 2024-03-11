@@ -7,6 +7,7 @@ import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
+import net.serenitybdd.screenplay.conditions.Check;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.questions.page.TheWebPage;
@@ -23,8 +24,27 @@ import starter.questions.RegistrationPageQuestions;
 
 import static org.hamcrest.CoreMatchers.anyOf;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
+import static starter.steps.database.databaseStepDefinitions.checkUserExists;
 
 public class webStepDefinitions {
+
+    @And("{actor} ensures username {string} and password {string} account exists")
+    public void userEnsuresUsernameUsernameAccountExists(Actor actor, String username, String password) {
+        actor.attemptsTo(
+                Check.whether(!checkUserExists(username))
+                        .andIfSo(
+                                LoginActions.clickSignUp(),
+                                RegisterActions.enterFirstName(username),
+                                RegisterActions.enterLastName(username),
+                                RegisterActions.enterPhone(username),
+                                RegisterActions.enterEmail(username),
+                                RegisterActions.enterUsername(username),
+                                RegisterActions.enterPassword(password),
+                                RegisterActions.clickSignUp()
+                        )
+        );
+        UTILITY_FUNCTIONS.WaitForSignInHeader.toAppear();
+    }
 
     @Given("{actor} is logged in with username {string} and password {string}")
     public void userIsLoggedIn(Actor actor, String username, String password) {
@@ -314,4 +334,5 @@ public class webStepDefinitions {
                 Ensure.that(TheWebPage.currentUrl()).containsIgnoringCase("account/withdraw")
         );
     }
+
 }

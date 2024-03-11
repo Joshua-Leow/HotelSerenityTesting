@@ -7,6 +7,7 @@ Feature: Web User Authentication
 
 #	Roland's database check
 	Scenario Outline: Successful User Authentication
+		And User ensures username '<Username>' and password '<Password>' account exists
 		When User input username '<Username>' and password '<Password>'
 		And User submit the login form
 		Then User should be authenticated successfully
@@ -97,29 +98,23 @@ Feature: Web User Authentication
 
 		#	REG_TC08
 	Scenario Outline: Register Existing User
+		And User ensures username '<Username>' and password '<Password>' account exists
 		When User clicks Sign Up button
-		And User enters first name "<firstname>"
-		And User enters last name "<lastname>"
-		And User enters phone "<phone>"
-		And User enters email "<email>"
-		And User enters username "<username>"
-		And User enters password "<password>"
-		And User clicks Sign Up Register button
-		When User clicks Sign Up button
-		And User enters first name "<firstname>"
-		And User enters last name "<lastname>"
-		And User enters phone "<phone>"
-		And User enters email "<email>"
-		And User enters username "<username>"
-		And User enters password "<password>"
+		And User enters first name "<Firstname>"
+		And User enters last name "<Lastname>"
+		And User enters phone "<Phone>"
+		And User enters email "<Email>"
+		And User enters username "<Username>"
+		And User enters password "<Password>"
 		And User clicks Sign Up Register button
 		Then User should see existing error message
 		Examples:
-			| firstname | lastname  | phone     | email            | username  | password  |
+			| Firstname | Lastname  | Phone     | Email            | Username  | Password  |
 			| john      | doe       | 123456789 | johndoe@test.com | johnydoe  | password1 |
 
   #	LOGIN_TC01
 	Scenario Outline: Successful User Authentication
+		And User ensures username '<Username>' and password '<Password>' account exists
 		When User input username '<Username>' and password '<Password>'
 		And User submit the login form
 		Then User should be authenticated successfully
@@ -136,10 +131,11 @@ Feature: Web User Authentication
 		Then User should see Error Message displayed "Invalid username and password"
 		Examples:
 			| Username  | Password   |
-			| TEST99    | TEST99     |
+			| TEST99*&  | TEST99*&   |
 
   #	LOGIN_TC03
 	Scenario Outline: Remember Me function
+		And User ensures username '<Username>' and password '<Password>' account exists
 		When User input username '<Username>' and password '<Password>'
 		And User checks Remember Me checkbox
 		And User submit the login form
@@ -151,6 +147,7 @@ Feature: Web User Authentication
 
   #	WEB_DASHBOARD_TC01
 	Scenario Outline: Verify the display on the Landing Page
+		And User ensures username '<Username>' and password '<Password>' account exists
 		When User input username '<Username>' and password '<Password>'
 		And User submit the login form
 		Then User should be authenticated successfully
@@ -161,6 +158,7 @@ Feature: Web User Authentication
 
    #	WEB_DASHBOARD_TC02
 	Scenario Outline: View Primary Balance
+		And User ensures username '<Username>' and password '<Password>' account exists
 		When User input username '<Username>' and password '<Password>'
 		And User submit the login form
 		Then User should be authenticated successfully
@@ -172,6 +170,7 @@ Feature: Web User Authentication
 
 	 #	WEB_DASHBOARD_TC03
 	Scenario Outline: View Savings Balance
+		And User ensures username '<Username>' and password '<Password>' account exists
 		When User input username '<Username>' and password '<Password>'
 		And User submit the login form
 		Then User should be authenticated successfully
@@ -183,6 +182,7 @@ Feature: Web User Authentication
 
 	 #	WEB_DASHBOARD_TC04
 	Scenario Outline: View Deposit
+		And User ensures username '<Username>' and password '<Password>' account exists
 		When User input username '<Username>' and password '<Password>'
 		And User submit the login form
 		Then User should be authenticated successfully
@@ -191,9 +191,10 @@ Feature: Web User Authentication
 		Examples:
 			| Username  | Password   |
 			| user69    | user69     |
-	@web
+@web
 	 #	WEB_DASHBOARD_TC05
 	Scenario Outline: View Withdrawal
+		And User ensures username '<Username>' and password '<Password>' account exists
 		When User input username '<Username>' and password '<Password>'
 		And User submit the login form
 		Then User should be authenticated successfully
@@ -206,6 +207,7 @@ Feature: Web User Authentication
 	 #	PRIMARY_TC02
 	#	put on hold, complex test case to sort
 	Scenario Outline: Sort Primary Balance table
+		And User ensures username '<Username>' and password '<Password>' account exists
 		When User input username '<Username>' and password '<Password>'
 		And User submit the login form
 		Then User should be authenticated successfully
