@@ -16,25 +16,25 @@ Feature: System Status Display on AS400 Terminal
 			| Username | Password |
 			| RRHADI   | K$$ja01  |
 
-#		TC01
-	Scenario Outline: Login successfully to AS400
+#		AS400_TC01
+	Scenario Outline: AS400_TC01_Login successfully to AS400
 		When User log in with username '<Username>' and password '<Password>'
 		Then User should see the text 'IBM i Main Menu' or text 'Display Messages' on the screen
 		Examples:
 			| Username | Password |
 			| RHADI    | K$$ja01  |
 
-#		TC02
-	Scenario Outline: Unsuccessful Login using invalid credentials
+#		AS400_TC02
+	Scenario Outline: AS400_TC02_Unsuccessful Login using invalid credentials
 		When User log in with username '<Username>' and password '<Password>'
 		Then User should see the text 'does not exist or password not correct for user profile' on the screen
 #		CPF1120 - User TEST does not exist or password not correct for user profile.
 		Examples:
 			| Username | Password |
 			| TEST     | TEST123  |
-	@as400
-#		TC03
-	Scenario Outline: View User Task
+
+#		AS400_TC03
+	Scenario Outline: AS400_TC03_View User Task
 		When User log in with username '<Username>' and password '<Password>'
 		And User navigate to 'User Task'
 		Then User should see the following options on the screen:
@@ -53,8 +53,8 @@ Feature: System Status Display on AS400 Terminal
 			| Username | Password |
 			| RHADI    | K$$ja01  |
 
-   #		TC04
-	Scenario Outline: Verify the display on "Display or Change your Job" under User
+   #		AS400_TC04
+	Scenario Outline: AS400_TC04_Verify the display on "Display or Change your Job" under User
 		When User log in with username '<Username>' and password '<Password>'
 		And User navigate to 'User Task'
 		And User navigate to 'Display or Change your Job'
@@ -69,13 +69,13 @@ Feature: System Status Display on AS400 Terminal
 			| 13. Display library list, if active                      |
 			| 14. Display open files, if active                        |
 			| 15. Display file overrides, if active                    |
-			| 16. Display commitment control status, if active        |
+			| 16. Display commitment control status, if active         |
 		Examples:
 			| Username | Password |
 			| RHADI    | K$$ja01  |
 
-#		TC05
-	Scenario Outline: Verify display of job status attributes
+#		AS400_TC05
+	Scenario Outline: AS400_TC05_Verify display of job status attributes
 		When User log in with username '<Username>' and password '<Password>'
 		And User navigate to 'User Task'
 		And User navigate to 'Display or Change your Job'
@@ -103,8 +103,8 @@ Feature: System Status Display on AS400 Terminal
 			| Username | Password |
 			| RHADI    | K$$ja01  |
 
-      #		TC06
-	Scenario Outline: Verify the display on "Display job definition attributes" under the Display or Change your Job on User Task
+      #		AS400_TC06
+	Scenario Outline: AS400_TC06_Verify the display on "Display job definition attributes" under the Display or Change your Job on User Task
 		When User log in with username '<Username>' and password '<Password>'
 		And User navigate to 'User Task'
 		And User navigate to 'Display or Change your Job'
@@ -131,8 +131,8 @@ Feature: System Status Display on AS400 Terminal
 			| Username | Password |
 			| RHADI    | K$$ja01  |
 
-      #		TC07
-	Scenario Outline: Verify the display on "Work with spooled files" under the Display or Change your Job on User Task
+      #		AS400_TC07
+	Scenario Outline: AS400_TC07_Verify the display on "Work with spooled files" under the Display or Change your Job on User Task
 		When User log in with username '<Username>' and password '<Password>'
 		And User navigate to 'User Task'
 		And User navigate to 'Display or Change your Job'
@@ -161,8 +161,8 @@ Feature: System Status Display on AS400 Terminal
 			| Username | Password |
 			| RHADI    | K$$ja01  |
 
-      #		TC08
-	Scenario Outline: Verify the display on "Display job run attributes, if active" under the Display or Change your Job on User Task
+      #		AS400_TC08
+	Scenario Outline: AS400_TC08_Verify the display on "Display job run attributes, if active" under the Display or Change your Job on User Task
 		When User log in with username '<Username>' and password '<Password>'
 		And User navigate to 'User Task'
 		And User navigate to 'Display or Change your Job'
@@ -182,8 +182,8 @@ Feature: System Status Display on AS400 Terminal
 			| Username | Password |
 			| RHADI    | K$$ja01  |
 
-	#		TC09
-	Scenario Outline: Verify the display on "Display job log; if active, on job queue, or pending" under the Display or Change your Job on User Task
+	#		AS400_TC09
+	Scenario Outline: AS400_TC09_Verify the display on "Display job log; if active, on job queue, or pending" under the Display or Change your Job on User Task
 		When User log in with username '<Username>' and password '<Password>'
 		And User navigate to 'User Task'
 		And User navigate to 'Display or Change your Job'
@@ -198,8 +198,8 @@ Feature: System Status Display on AS400 Terminal
 			| Username | Password |
 			| RHADI    | K$$ja01  |
 
-  	#		TC10
-	Scenario Outline: Verify the display on "Work with spooled files" under the Display or Change your Job on User Task
+  	#		AS400_TC10
+	Scenario Outline: AS400_TC10_Verify the display on "Work with spooled files" under the Display or Change your Job on User Task
 		When User log in with username '<Username>' and password '<Password>'
 		And User navigate to 'User Task'
 		And User navigate to 'Display or Change your Job'
@@ -214,6 +214,140 @@ Feature: System Status Display on AS400 Terminal
 			| Program          |
 			| Statement        |
 			| Procedure        |
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+
+	#		AS400_TC11
+	Scenario Outline: AS400_TC11_Verify the display on "Work with locks, if active" under the Display or Change your Job on User Task
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'Display or Change your Job'
+		And User navigate to 'Work with locks, if active'
+		Then User should see the following options on the screen:
+			| System:   PUB400                                                        |
+			| Job:                                                                    |
+			| User:                                                                   |
+			| Number:                                                                 |
+			| Job status:                                                             |
+			| Type options, press Enter.                                              |
+			| Work with job member locks                                              |
+			| Work with object locks                                                  |
+			| Object                                                                  |
+			| Member  ASP                                                             |
+			| Opt  Object      Library     Type       Lock     Status  Locks   Device |
+			| GAMES400    QSYS        *LIB       *SHRRD    HELD                       |
+			| MAIN        QSYS        *MENU      *SHRNUP   HELD                       |
+			| PUB400SYS   QSYS        *LIB       *SHRRD    HELD                       |
+			| QDUI80      QSYS        *FILE-DSP  *SHRNUP   HELD                       |
+			| QGPL        QSYS        *LIB       *SHRRD    HELD                       |
+			| QGWCJLCK    QSYS        *PNLGRP    *SHRNUP   HELD                       |
+			| QGWCJOB     QSYS        *PNLGRP    *SHRNUP   HELD                       |
+			| QHLPSYS     QSYS        *LIB       *SHRRD    HELD                       |
+			| QPAD0                                                                   |
+			| QSYS        *DEVD      *EXCLRD   HELD                                   |
+
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+
+	#		AS400_TC12
+	Scenario Outline: AS400_TC12_Verify the display on "Display library list, if active" under the Display or Change your Job on User Task
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'Display or Change your Job'
+		And User navigate to 'Display library list, if active'
+		Then User should see the following options on the screen:
+			| System:   PUB400                                                        |
+			| Job:                                                                    |
+			| User:                                                                   |
+			| Number:                                                                 |
+			| Type options, press Enter.                                              |
+			| Display objects in library                                              |
+			| ASP                                                                     |
+			| Opt  Library     Type      Device      Text                             |
+			| PUB400SYS   SYS                   $ PUB400.COM global programs          |
+			| QSYS        SYS                   System Library                        |
+			| QSYS2       SYS                   System Library for CPI's              |
+			| QUSRSYS     SYS                   System Library for Users              |
+			| QHLPSYS     SYS                                                         |
+			| RHADI1      CUR                   RHADI (*CURLIB your current library)  |
+			| QGPL        USR                   General Purpose Library               |
+			| QTEMP       USR                                                         |
+			|GAMES400    USR                   $ fun library                          |
+
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+
+	#		AS400_TC13
+	Scenario Outline: AS400_TC13_Verify the display on "Display open files, if active" under the Display or Change your Job on User Task
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'Display or Change your Job'
+		And User navigate to 'Display open files, if active'
+		Then User should see the following options on the screen:
+			| Job . . :                                      |
+			| User . . :                                      |
+			| Number . . . :                                  |
+			| Number of open data paths . . . . . . . . . . : |
+			| Member/                                         |
+			| QDUI80     QSYS       QPAD0                     |
+			| *ACTGRPDFN  *DFTACTGRP 0000000000000002         |
+			| QDDSPOF    QSYS       QPAD                      |
+			| *ACTGRPDFN  *DFTACTGRP 0000000000000002         |
+
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+
+	#		AS400_TC14
+	Scenario Outline: AS400_TC14_Verify the display on "Display file overrides, if active" under the Display or Change your Job on User Task
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'Display or Change your Job'
+		And User navigate to 'Display file overrides, if active'
+		Then User should see the following options on the screen:
+			| Job  . . :                                              |
+			| User . . :                                              |
+			| Number . . :                                            |
+			| Call level . . . . . . . . . . . . . :                  |
+			| Opt  File          Level   Type  Keyword Specifications |
+			| (No file overrides)                                     |
+
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+
+	#		AS400_TC15
+	Scenario Outline: AS400_TC15_Verify the display on "Display commitment control status, if active" under the Display or Change your Job on User Task
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'Display or Change your Job'
+		And User navigate to 'Display commitment control status, if active'
+		Then User should see the following options on the screen:
+			| Commitment                             |
+			| Opt     Definition     Text            |
+			| (No commitment definitions are active) |
+
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+	@as400
+	#		AS400_TC16
+	Scenario Outline: AS400_TC16_Verify the display on "Display messages" under User Task
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'Display messages'
+		Then User should see the following options on the screen:
+			| System:   PUB400                       |
+			| Queue . . . . . :                      |
+			| Program . . . . :                      |
+			| Library . . . :                        |
+			| Severity  . . . :                      |
+			| Delivery  . . . :                      |
+			| Type reply (if required), press Enter. |
+
 		Examples:
 			| Username | Password |
 			| RHADI    | K$$ja01  |

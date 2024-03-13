@@ -9,6 +9,7 @@ Feature: PDF Testing
 		Examples:
 			| PDF_1  							         	| PDF_2   				         					|
 			| C:\Users\joshua.leow\Downloads\Invoice.pdf 	| C:\Users\joshua.leow\Downloads\Invoice.pdf    	|
+			| C:\Users\joshua.leow\Downloads\Invoice.pdf 	| C:\Users\joshua.leow\Downloads\Invoice_edited.pdf |
 			| C:\Users\joshua.leow\Downloads\Invoice.pdf 	| C:\Users\joshua.leow\Downloads\Invoice2.pdf    	|
 
 
