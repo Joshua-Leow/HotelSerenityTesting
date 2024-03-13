@@ -10,6 +10,8 @@ import io.restassured.response.Response;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.rest.SerenityRest;
 import net.serenitybdd.screenplay.Actor;
+import org.hamcrest.Matchers;
+import starter.pages.API.BalancePage;
 import starter.pages.API.DepositPage;
 import starter.pages.API.LoginPage;
 import starter.pages.API.SignUpPage;
@@ -194,5 +196,59 @@ public class apiStepDefinitions {
     @Then("{actor} should see no errors")
     public void userShouldSeeNoErrors(Actor actor) {
         SerenityRest.lastResponse().then().statusCode(201);
+    }
+
+    @When("{actor} checks balance in accounts")
+    public void userChecksBalanceInAccounts(Actor actor) {
+        String username = actor.recall("current_username");
+        JsonPath responseBody = SerenityRest.lastResponse().jsonPath();
+        String token = responseBody.getString("token");
+
+        BalancePage payload = new BalancePage(username);
+
+        Response response = SerenityRest.given()
+                .baseUri(getCurrentEndpoint())
+                .basePath("/balance")
+                .header("Authorization", "Bearer " + token)
+                .body(payload, ObjectMapperType.GSON)
+                .accept(ContentType.JSON)
+                .contentType(ContentType.JSON)
+                .get();
+    }
+
+    @Then("{actor} should see primary account balance")
+    public void userShouldSeePrimaryAccountBalance(Actor actor) {
+        String expectedStatus = "success";
+
+        SerenityRest.lastResponse().then().statusCode(200);
+
+        // another method without using 'remember', 'recall' feature
+        JsonPath responseBody = SerenityRest.lastResponse().jsonPath();
+        String actualStatus = responseBody.getString("status");
+        System.out.println("=======================actualStatus: " + actualStatus);
+
+        Double primaryBalance = responseBody.getDouble("accounts.Primary");
+        System.out.println("=======================primaryBalance: " + primaryBalance);
+        assertThat(primaryBalance).isGreaterThanOrEqualTo(0.0f);
+
+        assertThat(actualStatus).as("Status is correct").isEqualTo(expectedStatus);
+    }
+
+    @Then("{actor} should see savings account balance")
+    public void userShouldSeeSavingsAccountBalance(Actor actor) {
+        String expectedStatus = "success";
+
+        SerenityRest.lastResponse().then().statusCode(200);
+
+        // another method without using 'remember', 'recall' feature
+        JsonPath responseBody = SerenityRest.lastResponse().jsonPath();
+        String actualStatus = responseBody.getString("status");
+        System.out.println("=======================actualStatus: " + actualStatus);
+
+        Double savingsBalance = responseBody.getDouble("accounts.Savings");
+        System.out.println("=======================savingsBalance: " + savingsBalance);
+        assertThat(savingsBalance).isGreaterThanOrEqualTo(0.0f);
+
+        assertThat(actualStatus).as("Status is correct").isEqualTo(expectedStatus);
     }
 }
