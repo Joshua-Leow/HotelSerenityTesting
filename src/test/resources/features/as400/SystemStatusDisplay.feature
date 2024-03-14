@@ -333,7 +333,7 @@ Feature: System Status Display on AS400 Terminal
 		Examples:
 			| Username | Password |
 			| RHADI    | K$$ja01  |
-	@as400
+
 	#		AS400_TC16
 	Scenario Outline: AS400_TC16_Verify the display on "Display messages" under User Task
 		When User log in with username '<Username>' and password '<Password>'
@@ -347,6 +347,66 @@ Feature: System Status Display on AS400 Terminal
 			| Severity  . . . :                      |
 			| Delivery  . . . :                      |
 			| Type reply (if required), press Enter. |
+
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+
+	#		AS400_TC17
+	Scenario Outline: AS400_TC17_Verify the display on "Send a message" under User Task
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'Send a message'
+		Then User should see the following options on the screen:
+			| Message text . . . . . . . . . . MSG   |
+			| To user profile  . . . . . . . . TOUSR |
+
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+
+	#		AS400_TC18
+	Scenario Outline: AS400_TC18_Verify the display on "Submit a job" under User Task
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'Submit a job'
+		Then User should see the following options on the screen:
+			| Command to run . . . . . . . . . CMD                     |
+			| Job name . . . . . . . . . . . . JOB            *JOBD    |
+			| Job description  . . . . . . . . JOBD           *USRPRF  |
+			| Library  . . . . . . . . . . .                           |
+			| Job queue  . . . . . . . . . . . JOBQ           *JOBD    |
+			| Job priority (on JOBQ) . . . . . JOBPTY         *JOBD    |
+			| Output priority (on OUTQ)  . . . OUTPTY         *JOBD    |
+			| Print device . . . . . . . . . . PRTDEV         *CURRENT |
+
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+
+	#		AS400_TC19
+	Scenario Outline: AS400_TC19_Verify the display on "Work with your spooled output files" under User Task
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'Work with your spooled output files'
+		Then User should see the following options on the screen:
+			| Device or                     Total     Cur                                   |
+			| Opt  File        User        Queue       User Data   Sts   Pages    Page  Copy|
+			| QPJOBLOG    RHADI       QEZJOBLOG   QPAD024046  RDY      10             1     |
+			| QPJOBLOG    RHADI       QEZJOBLOG   QPAD025143  RDY      10             1     |
+
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+		@as400
+   #		AS400_TC20
+	Scenario Outline: AS400_TC20_Verify the display on "Work with your batch jobs" under User Task
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'Work with your batch jobs'
+		Then User should see the following options on the screen:
+			| Opt  Job         User        Type     -----Status-----  Function |
+			|(No jobs to display)                                              |
 
 		Examples:
 			| Username | Password |
