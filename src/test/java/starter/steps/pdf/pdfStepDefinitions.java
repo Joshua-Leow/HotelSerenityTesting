@@ -13,6 +13,7 @@ import starter.pages.API.LoginPage;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -48,15 +49,21 @@ public class pdfStepDefinitions {
     @Then("{actor} sees PDF file similarity should be above 90%")
     public void userShouldSeeTheResponseAuthenticatedSuccessfully(Actor actor) {
         Double similarity = actor.recall("similarity_percentage");
-        boolean above90Percent = similarity > 0.9; // 90%
+        similarity = similarity * 100;
+        DecimalFormat df = new DecimalFormat("#.##"); // format to 2 decimal place
+        String similaritySTR = df.format(similarity);
+        boolean above90Percent = similarity > 90; // 90%
         if (above90Percent) {
             System.out.println("Above 90% PASSED");
-            System.out.println("similarity = " + similarity);
+            System.out.println("similarity = " + similaritySTR + "%");
+            Serenity.recordReportData().withTitle("similarity = " + similaritySTR + "%").andContents("Above 90% PASSED");
             assertThat(true).isTrue();
+
         }
         else {
             System.out.println("Above 90% FAILED");
-            System.out.println("similarity = " + similarity);
+            System.out.println("similarity = " + similaritySTR + "%");
+            Serenity.recordReportData().withTitle("similarity = " + similaritySTR + "%").andContents("Below 90% FAILED");
             assertThat(false).isTrue();
         }
     }
