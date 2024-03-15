@@ -26,7 +26,6 @@ Feature: Web User Authentication
 		When User clicks Sign Up button
 		Then User should see sign up elements
 
-
 #	REG_TC02
 	Scenario Outline: Successful User Registration
 		When User clicks Sign Up button
@@ -191,7 +190,7 @@ Feature: Web User Authentication
 		Examples:
 			| Username  | Password   |
 			| user69    | user69     |
-@web
+
 	 #	WEB_DASHBOARD_TC05
 	Scenario Outline: WEB_DASHBOARD_TC05_View Withdrawal
 		And User ensures username '<Username>' and password '<Password>' account exists
@@ -222,7 +221,7 @@ Feature: Web User Authentication
 			| user69    | user69     | Appointment | Schedule an Appointment | Create           |
 			| user69    | user69     | Me          | Profile                 | Profile          |
 			| user69    | user69     | Me          | Logout                  | Logout           |
-
+@web
 		  #	WEB_DEPOSIT_TC01
 	Scenario Outline: WEB_DEPOSIT_TC01_Verify the display on the Deposit Page
 		And User ensures username '<Username>' and password '<Password>' account exists

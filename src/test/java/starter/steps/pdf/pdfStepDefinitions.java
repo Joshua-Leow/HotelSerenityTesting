@@ -43,6 +43,8 @@ public class pdfStepDefinitions {
         actor.remember("similarity_percentage", similarity);
         System.out.printf("Similarity: %.2f%%\n", similarity * 100);
 
+        Serenity.recordReportData().withTitle("Text1 contents:").andContents(text1);
+        Serenity.recordReportData().withTitle("Text2 contents:").andContents(text2);
         reportDifferences(text1, text2);
     }
 
@@ -58,10 +60,9 @@ public class pdfStepDefinitions {
             System.out.println("similarity = " + similaritySTR + "%");
             Serenity.recordReportData().withTitle("similarity = " + similaritySTR + "%").andContents("Above 90% PASSED");
             assertThat(true).isTrue();
-
         }
         else {
-            System.out.println("Above 90% FAILED");
+            System.out.println("Below 90% FAILED");
             System.out.println("similarity = " + similaritySTR + "%");
             Serenity.recordReportData().withTitle("similarity = " + similaritySTR + "%").andContents("Below 90% FAILED");
             assertThat(false).isTrue();

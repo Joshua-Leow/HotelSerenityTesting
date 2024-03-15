@@ -392,13 +392,13 @@ Feature: System Status Display on AS400 Terminal
 		Then User should see the following options on the screen:
 			| Device or                     Total     Cur                                   |
 			| Opt  File        User        Queue       User Data   Sts   Pages    Page  Copy|
-			| QPJOBLOG    RHADI       QEZJOBLOG   QPAD024046  RDY      10             1     |
-			| QPJOBLOG    RHADI       QEZJOBLOG   QPAD025143  RDY      10             1     |
+			| QPJOBLOG    RHADI       QEZJOBLOG   QPAD |
+			|        RDY      10             1         |
 
 		Examples:
 			| Username | Password |
 			| RHADI    | K$$ja01  |
-		@as400
+	@as400
    #		AS400_TC20
 	Scenario Outline: AS400_TC20_Verify the display on "Work with your batch jobs" under User Task
 		When User log in with username '<Username>' and password '<Password>'

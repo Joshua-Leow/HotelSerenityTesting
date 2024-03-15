@@ -52,7 +52,7 @@ Feature: API User Authentication
 		Examples:
 			| Username  | Password   |
 			| TEST123   | TEST123    |
-@api
+
 	#	API_DASHBOARD_TC02
 	Scenario Outline: API_DASHBOARD_TC02_View Primary Balance
 		Given User is logged in using username '<Username>' and password '<Password>'
@@ -61,7 +61,7 @@ Feature: API User Authentication
 		Examples:
 			| Username  | Password   |
 			| user01    | user01     |
-
+@api
    #	API_DASHBOARD_TC03
 	Scenario Outline: API_DASHBOARD_TC03_View Savings Balance
 		Given User is logged in using username '<Username>' and password '<Password>'
