@@ -398,7 +398,7 @@ Feature: System Status Display on AS400 Terminal
 		Examples:
 			| Username | Password |
 			| RHADI    | K$$ja01  |
-	@as400
+
    #		AS400_TC20
 	Scenario Outline: AS400_TC20_Verify the display on "Work with your batch jobs" under User Task
 		When User log in with username '<Username>' and password '<Password>'
@@ -407,6 +407,198 @@ Feature: System Status Display on AS400 Terminal
 		Then User should see the following options on the screen:
 			| Opt  Job         User        Type     -----Status-----  Function |
 			|(No jobs to display)                                              |
+
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+
+   #		AS400_TC21
+	Scenario Outline: AS400_TC21_Verify the display on "Display or change your library list" under User Task
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'Display or change your library list'
+		Then User should see the following options on the screen:
+			| Sequence                   Sequence                   Sequence         |
+			| Number   Library           Number   Library           Number   Library |
+			| 0                        150                        300                |
+			| 10    QGPL                160                        310               |
+			| 20    QTEMP               170                        320               |
+			| 30    GAMES400            180                        330               |
+			| 40                        190                        340               |
+			| 50                        200                        350               |
+			| 60                        210                        360               |
+			| 70                        220                        370               |
+			| 80                        230                        380               |
+			| 90                        240                        390               |
+			| 100                        250                        400              |
+			| 110                        260                        410              |
+			| 120                        270                        420              |
+			| 130                        280                        430              |
+			| 140                        290                        440              |
+
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+
+   #		AS400_TC22
+	Scenario Outline: AS400_TC22_Verify the display on "Change your password" under User Task
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'Change your password'
+		Then User should see the following options on the screen:
+			| Change Password                             |
+			| User profile  . . . . . . . . . . . . . . : |
+			| Password last changed . . . . . . . . . . : |
+			| Type choices, press Enter.                  |
+			| Current password  . . . . . . . . . . . .   |
+			| New password  . . . . . . . . . . . . . .   |
+			| New password (to verify)  . . . . . . . .   |
+
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+
+   #		AS400_TC23
+	Scenario Outline: AS400_TC23_Verify the display on "Change your user profile" under User Task
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'Change your user profile'
+		Then User should see the following options on the screen:
+			| Assistance level . . . . . . . . ASTLVL         *INTERMED          |
+			| Current library  . . . . . . . . CURLIB         RHADI1             |
+			| Initial program to call  . . . . INLPGM         SETLANG            |
+			| Library  . . . . . . . . . . .                  PUB400SYS          |
+			| Initial menu . . . . . . . . . . INLMNU         MAIN               |
+			| Library  . . . . . . . . . . .                  *LIBL              |
+			| Text 'description' . . . . . . . TEXT           'Hadi,Roland Ross' |
+
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+
+   #		AS400_TC24
+	Scenario Outline: AS400_TC24_Verify the display on "More User Task option" under User Task
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'More User Task option'
+		Then User should see the following options on the screen:
+			| Access a remote system        |
+			| Question and answer           |
+			| Send or receive files         |
+			| Start a System/36 environment |
+
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+
+   #		AS400_TC25
+	Scenario Outline: AS400_TC25_Verify the display on "Access a remote system" under More user task option on User Task
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'More User Task option'
+		And User navigate to 'Access a remote system'
+		Then User should see the following options on the screen:
+			| Sign on using 3270 emulation    |
+			| Sign on using 5250 pass-through |
+			| Submit a network job            |
+			| Submit a remote command         |
+			| 3270 printer emulation          |
+			| Remote job entry                |
+			| Start TCP/IP TELNET             |
+			| Run remote command              |
+			| Send TCP/IP spooled file        |
+			| Start TCP/IP file transfer      |
+			| Start Point-to-Point TCP/IP     |
+
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+
+		   #		AS400_TC26
+	Scenario Outline: AS400_TC26_Verify the display on "Sign on using 3270 emulation" under Access a remote system on User Task
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'More User Task option'
+		And User navigate to 'Access a remote system'
+		And User navigate to 'Sign on using 3270 emulation'
+		Then User should see the following options on the screen:
+			| Emulation controller, or . . . . EMLCTL                  |
+			| Emulation device, or . . . . . . EMLDEV                  |
+			| Emulation location . . . . . . . EMLLOC                  |
+			| Display device, batch only . . . DSPDEV         *CURRENT |
+			| Page Up (Roll Down) key  . . . . PAGEUP         *PA2     |
+			| Page Down (Roll Up) key  . . . . PAGEDOWN       *PA1     |
+			| Test Request key . . . . . . . . TESTREQ        *DFT     |
+			| Cursor Select key  . . . . . . . CSRSLT         *NONE    |
+			| SNA DBCS 3270PC emulation  . . . IGCEMLPC       *NO      |
+
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+
+		   #		AS400_TC27
+	Scenario Outline: AS400_TC27_Verify the display on "Sign on using 5250 pass-through" under Access a remote system on User Task
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'More User Task option'
+		And User navigate to 'Access a remote system'
+		And User navigate to 'Sign on using 5250 pass-through'
+		Then User should see the following options on the screen:
+			| Remote location  . . . . . . . . RMTLOCNAME |
+
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+	@as400
+		   #		AS400_TC28
+	Scenario Outline: AS400_TC28_Verify the display on "Submit a network job" under Access a remote system on User Task
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'More User Task option'
+		And User navigate to 'Access a remote system'
+		And User navigate to 'Submit a network job'
+		Then User should see the following options on the screen:
+			| File . . . . . . . . . . . . . . FILE                     |
+			| Library  . . . . . . . . . . .                  *LIBL     |
+			| User ID:                         TOUSRID                  |
+			| User ID  . . . . . . . . . . .                            |
+			| Address  . . . . . . . . . . .                            |
+			| + for more values                                         |
+			| Member . . . . . . . . . . . . . MBR            *FIRST    |
+
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+
+		 #		AS400_TC29
+	Scenario Outline: AS400_TC29_Verify the display on "Submit a remote command" under Access a remote system on User Task
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'More User Task option'
+		And User navigate to 'Access a remote system'
+		And User navigate to 'Submit a remote command'
+		Then User should see the following options on the screen:
+			| Command to run . . . . . . . . . CMD                  |
+			| DDM file . . . . . . . . . . . . DDMFILE              |
+			| Library  . . . . . . . . . . .                  *LIBL |
+
+		Examples:
+			| Username | Password |
+			| RHADI    | K$$ja01  |
+
+		 #		AS400_TC30
+	Scenario Outline: AS400_TC30_Verify the display on "3270 printer emulation" under Access a remote system on User Task
+		When User log in with username '<Username>' and password '<Password>'
+		And User navigate to 'User Task'
+		And User navigate to 'More User Task option'
+		And User navigate to 'Access a remote system'
+		And User navigate to '3270 printer emulation'
+		Then User should see the following options on the screen:
+			| Start printer emulation |
+			| Eject emulation output  |
+			| Emulate printer keys    |
+			| End printer emulation   |
+			| Related commands        |
 
 		Examples:
 			| Username | Password |
