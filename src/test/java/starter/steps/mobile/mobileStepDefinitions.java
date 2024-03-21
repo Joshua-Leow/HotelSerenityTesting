@@ -1,5 +1,6 @@
 package starter.steps.mobile;
 import io.appium.java_client.android.AndroidDriver;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -14,15 +15,35 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import starter.actions.web.HomeActions;
 import starter.actions.web.LoginActions;
 import starter.actions.web.RegisterActions;
+import starter.actions.web.UTILITY_FUNCTIONS;
 import starter.questions.HomePageQuestions;
 import starter.questions.LoginPageQuestions;
 import starter.questions.PrimaryPageQuestions;
 import starter.questions.RegistrationPageQuestions;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 public class mobileStepDefinitions {
+    @Before
+    public void clearAppCache() {
+        try {
+            String userProfile = System.getenv("userprofile");
+            String command = "cmd /c adb shell pm clear com.example.dummybank";
+            Process process = Runtime.getRuntime().exec(command, null, new File(userProfile));
+            int exitCode = process.waitFor();
+            if (exitCode == 0) {
+                System.out.println("=================== Clear App Cache Command executed successfully.");
+            } else {
+                System.out.println("=================== Error executing command. Exit code: " + exitCode);
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Given("{actor} is on the mobile login page")
     public void userIsOnTheMobileLoginPage(Actor actor) {
         actor.attemptsTo(
@@ -126,6 +147,7 @@ public class mobileStepDefinitions {
         actor.attemptsTo(
                 RegisterActions.clickSignUp()
         );
+        UTILITY_FUNCTIONS.WaitForSignInHeader.toAppear();
     }
 
     @And("{actor} clicks Cancel Register button on the mobile")
