@@ -6,7 +6,7 @@ serenity {
 
 drivers {
     windows {
-        webdriver.chrome.driver = src/test/resources/webdriver/windows/chromedriver_121.exe
+        webdriver.chrome.driver = src/test/resources/webdriver/windows/chromedriver_122.exe
     }
 }
 

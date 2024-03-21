@@ -59,7 +59,7 @@ Feature: Web User Authentication
 			| 123456789 | 123456789 | 123456789 | 123456789 | 123456789 | 123456789 |
 			| qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio |
 
-		#	REG_TC04
+		#	REG_TC04 DEF01
 	Scenario: Show password
 		When User clicks Sign Up button
 		And User enters password "qwerty"

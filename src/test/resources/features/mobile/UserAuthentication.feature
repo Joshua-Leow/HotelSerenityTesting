@@ -27,7 +27,7 @@ Feature: Mobile User Authentication
 		Then User redirects to login page on the mobile
 		Examples:
 			| firstname | lastname | phone | email  | username | password |
-			| user      | user     | 12345 | az@jkk | user98   | user99   |
+			| user      | user     | 12345 | az@jkj | user99   | user99   |
 		# email and username cannot exist
 
  	#	REG_TC03
@@ -47,13 +47,13 @@ Feature: Mobile User Authentication
 			| 123456789 | 123456789 | 123456789 | 123456789 | 123456789 | 123456789 |
 			| qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio | qwertyuio |
 
- 	#	REG_TC04
+ 	#	REG_TC04 DEF01
 	Scenario: Show password
 		When User clicks Sign Up button on the mobile
 		And User enters password "qwerty" on the mobile
 		And User clicks show password on the mobile
 		Then User should see password not masked on the mobile
-	@mobile
+
 	#	REG_TC05
 	Scenario: Submit Registration without filling up the Sign Up field
 		When User clicks Sign Up button on the mobile
@@ -77,7 +77,7 @@ Feature: Mobile User Authentication
 		Examples:
 			| firstname | lastname | phone | email  | username | password |
 			| user      | user     | 12345 | ab@cde | user999  | user01   |
-
+	@mobile
 	#	REG_TC07
 	Scenario: Access Sign up page
 		When User clicks Sign Up button on the mobile
