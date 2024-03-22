@@ -6,9 +6,8 @@ serenity {
 
 environments {
   default {
-#    webdriver.base.url = "http://10.19.128.30:8080"
     webdriver.base.url = "https://gt-tcoe-labs.site/index"
-    restapi.baseurl = "http://10.19.128.30:5000"
+    restapi.baseurl = "http://gt-tcoe-labs.site:5000"
     as400.host = "PUB400.COM"
     as400.port = "23"
     as400.ssl = "NONE"
