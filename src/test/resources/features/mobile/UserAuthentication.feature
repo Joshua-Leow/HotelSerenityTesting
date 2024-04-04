@@ -29,7 +29,7 @@ Feature: Mobile User Authentication
 			| firstname | lastname | phone | email  | username | password |
 			| user      | user     | 12345 | az@jkj | user99   | user99   |
 		# email and username cannot exist
-@mobile
+
  	#	REG_TC03
 	Scenario Outline: Validation on sign up page
 		When User clicks Sign Up button on the mobile
@@ -59,7 +59,7 @@ Feature: Mobile User Authentication
 		When User clicks Sign Up button on the mobile
 		And User clicks Sign Up Register button on the mobile
 		Then User should see existing error message on the mobile
-
+	@mobile
 	#	REG_TC06
 	Scenario Outline: Successfully Cancel User Registration
 		When User clicks Sign Up button on the mobile

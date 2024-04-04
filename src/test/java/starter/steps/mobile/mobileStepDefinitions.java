@@ -32,6 +32,7 @@ public class mobileStepDefinitions {
         try {
             String userProfile = System.getenv("userprofile");
             String command = "cmd /c adb shell pm clear com.example.dummybank";
+            //String command = "cmd /c taskkill /F /IM chromedriver.exe /IM chrome.exe";
             Process process = Runtime.getRuntime().exec(command, null, new File(userProfile));
             int exitCode = process.waitFor();
             if (exitCode == 0) {
