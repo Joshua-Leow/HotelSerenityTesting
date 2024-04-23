@@ -14,3 +14,5 @@ Feature: Customer features
     Scenario: Verify the display on the Amenities Page
         When User clicks Amenities
         Then User should see Amenities page elements
+
+# mvn clean verify -Dbrowser=chrome
