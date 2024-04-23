@@ -15,9 +15,7 @@ import starter.actions.web.LoginActions;
 import starter.actions.web.RegisterActions;
 import starter.actions.web.UTILITY_FUNCTIONS;
 import starter.pages.web.LoginPage;
-import starter.questions.HomePageQuestions;
-import starter.questions.LoginPageQuestions;
-import starter.questions.RegistrationPageQuestions;
+import starter.questions.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.hamcrest.CoreMatchers.anyOf;
@@ -35,8 +33,44 @@ public class webStepDefinitions {
     @Then("{actor} should see Dashboard page elements")
     public void userShouldSeeDashboardPageElements(Actor actor) {
         actor.should(
+                seeThat(HomePageQuestions.isAboutSideButtonVisible()),
+                seeThat(HomePageQuestions.isLoginSideButtonVisible()),
+                seeThat(HomePageQuestions.isRegisterSideButtonVisible()),
                 seeThat(HomePageQuestions.isRoomsButtonVisible()),
                 seeThat(HomePageQuestions.isAmenitiesButtonVisible())
+        );
+    }
+
+    @When("{actor} clicks Rooms")
+    public void userClicksRooms(Actor actor) {
+        actor.attemptsTo(
+                HomeActions.clickRooms()
+        );
+    }
+
+    @Then("{actor} should see Rooms page elements")
+    public void userShouldSeeRoomsPageElements(Actor actor) {
+        actor.should(
+                seeThat(RoomsPageQuestions.isDeluxeCardVisible()),
+                seeThat(RoomsPageQuestions.isStandardCardVisible()),
+                seeThat(RoomsPageQuestions.isSuperSingleCardVisible()),
+                seeThat(RoomsPageQuestions.isSingleCardVisible()),
+                seeThat(HomePageQuestions.isRoomsButtonVisible()),
+                seeThat(HomePageQuestions.isAmenitiesButtonVisible())
+        );
+    }
+
+    @When("{actor} clicks Amenities")
+    public void userClicksAmenities(Actor actor) {
+        actor.attemptsTo(
+                HomeActions.clickAmenities()
+        );
+    }
+
+    @Then("{actor} should see Amenities page elements")
+    public void userShouldSeeAmenitiesPageElements(Actor actor) {
+        actor.should(
+                seeThat(AmenitiesPageQuestions.isAllAmenitiesCardVisible())
         );
     }
 }
