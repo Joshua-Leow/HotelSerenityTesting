@@ -18,7 +18,7 @@ public class LoginActions {
     }
     public static Performable enterUserName(String username) {
         return Task.where("{0} enters username '" + username + "'",
-                Enter.theValue(username).into(LoginPage.USERNAME_FIELD)
+                Enter.theValue(username).into(LoginPage.EMAIL_FIELD)
         );
     }
 
@@ -34,15 +34,9 @@ public class LoginActions {
         );
     }
 
-    public static Performable clickSignUp() {
-        return Task.where("{0} clicks Sign Up button",
-                Click.on(LoginPage.SIGNUP_BUTTON)
-        );
-    }
-
     public static Performable clickRememberMe() {
         return Task.where("{0} clicks Remember Me checkbox",
-                Click.on(LoginPage.REMEMBER_ME_CHECKBOX)
+                Click.on(LoginPage.REMEMBERME_CHECKBOX)
         );
     }
 }
