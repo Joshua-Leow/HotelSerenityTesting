@@ -33,11 +33,11 @@ public class webStepDefinitions {
     @Then("{actor} should see Dashboard page elements")
     public void userShouldSeeDashboardPageElements(Actor actor) {
         actor.should(
-                seeThat(HomePageQuestions.isAboutSideButtonVisible()),
-                seeThat(HomePageQuestions.isLoginSideButtonVisible()),
-                seeThat(HomePageQuestions.isRegisterSideButtonVisible()),
-                seeThat(HomePageQuestions.isRoomsButtonVisible()),
-                seeThat(HomePageQuestions.isAmenitiesButtonVisible())
+                seeThat("About side button visible", HomePageQuestions.isAboutSideButtonVisible()),
+                seeThat("Login side button visible", HomePageQuestions.isLoginSideButtonVisible()),
+                seeThat("Register side button visible", HomePageQuestions.isRegisterSideButtonVisible()),
+                seeThat("Rooms button visible", HomePageQuestions.isRoomsButtonVisible()),
+                seeThat("Amenities button visible", HomePageQuestions.isAmenitiesButtonVisible())
         );
     }
 
@@ -51,12 +51,12 @@ public class webStepDefinitions {
     @Then("{actor} should see Rooms page elements")
     public void userShouldSeeRoomsPageElements(Actor actor) {
         actor.should(
-                seeThat(RoomsPageQuestions.isDeluxeCardVisible()),
-                seeThat(RoomsPageQuestions.isStandardCardVisible()),
-                seeThat(RoomsPageQuestions.isSuperSingleCardVisible()),
-                seeThat(RoomsPageQuestions.isSingleCardVisible()),
-                seeThat(HomePageQuestions.isRoomsButtonVisible()),
-                seeThat(HomePageQuestions.isAmenitiesButtonVisible())
+                seeThat("Deluxe Room Card visible", RoomsPageQuestions.isDeluxeCardVisible()),
+                seeThat("Standard Room Card visible", RoomsPageQuestions.isStandardCardVisible()),
+                seeThat("Super Single Bed Card visible", RoomsPageQuestions.isSuperSingleCardVisible()),
+                seeThat("Single Bed Card visible", RoomsPageQuestions.isSingleCardVisible()),
+                seeThat("Rooms button visible", HomePageQuestions.isRoomsButtonVisible()),
+                seeThat("Amenities button visible", HomePageQuestions.isAmenitiesButtonVisible())
         );
     }
 
@@ -70,7 +70,9 @@ public class webStepDefinitions {
     @Then("{actor} should see Amenities page elements")
     public void userShouldSeeAmenitiesPageElements(Actor actor) {
         actor.should(
-                seeThat(AmenitiesPageQuestions.isAllAmenitiesCardVisible())
+                seeThat("All Amenities Cards visible", AmenitiesPageQuestions.isAllAmenitiesCardVisible()),
+                seeThat("Rooms button visible", HomePageQuestions.isRoomsButtonVisible()),
+                seeThat("Amenities button visible", HomePageQuestions.isAmenitiesButtonVisible())
         );
     }
 }
